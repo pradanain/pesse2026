@@ -2,6 +2,20 @@
 
 Target: Linux Docker Compose, Traefik yang sudah berjalan di entrypoint `web` port 80, dan Cloudflare Tunnel yang sudah tersedia. Bundle tidak memasang Traefik/cloudflared baru dan tidak mengambil port host aplikasi.
 
+## Windows CMD / PowerShell
+
+Docker Desktop harus memakai **Linux containers**. Ekstrak paket privat di root checkout. `docker pull` hanya mengambil image; perintah itu tidak mengambil launcher, Compose, atau data privat.
+
+Pada CMD Windows, jalankan:
+
+```bat
+cd /d C:\Projects\pesse
+git pull origin main
+deploy.cmd -Pull
+```
+
+Jika folder berasal dari ZIP, unduh/ekstrak kode terbaru terlebih dahulu sebagai pengganti `git pull`. Pada PowerShell, gunakan `powershell -NoProfile -ExecutionPolicy Bypass -File .\deploy.ps1 -Pull`. Opsi Bypass hanya berlaku pada proses launcher tersebut, tanpa mengubah kebijakan PowerShell sistem. Tanpa `-Pull`, launcher memakai image offline bila tersedia. Konfigurasi, data dan named volume sama dengan Linux. Tidak perlu memasang Bash/WSL untuk menjalankan launcher Windows ini.
+
 ## Dua paket yang dipisahkan
 
 1. **GITHUB.zip**: ekstrak isinya ke repository. Berisi kode, Dockerfile, Compose server, pengujian, dan workflow. Aman dari workbook/database/secret aplikasi.

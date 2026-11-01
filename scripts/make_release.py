@@ -19,7 +19,7 @@ def create_release(root, destination):
     source_zip = destination / f'PESSE2026-GITHUB-{stamp}.zip'
     roots = ['portal', 'deploy', 'scripts', 'tests', '.github']
     files = ['Dockerfile', '.dockerignore', '.gitignore', '.env.example', 'deploy.env.example',
-             'compose.yml', 'compose.traefik.yml', 'compose.server.yml', 'deploy.sh', 'wsgi.py',
+             'compose.yml', 'compose.traefik.yml', 'compose.server.yml', 'deploy.sh', 'deploy.ps1', 'deploy.cmd', 'wsgi.py',
              'run_local.py', 'setup_local.py', 'start.ps1', 'README.md', 'docs/DEPLOY_SERVER.md',
              'requirements.txt', 'requirements-dev.txt', 'requirements.lock.txt', 'requirements-dev.lock.txt']
     selected = [root / name for name in files]
