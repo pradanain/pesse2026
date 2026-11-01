@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Rincian data pendukung{% endblock %}
+{% block content %}
+{% set list_url = url_for('web.assignments', code=a.region, **request.args.to_dict()) %}
+<div class="detail-topline"><a class="back-link" href="{{ list_url }}">{{ icon('back') }} Kembali ke daftar objek</a>{% if a.issues %}<a class="notice warning review-notice" href="#block-sumber" data-open-section="block-sumber">{{ icon('info') }}<strong>{{ a.issues|length }} catatan sumber</strong>{{ icon('arrow') }}</a>{% endif %}</div>
+<section class="identity compact-identity" aria-label="Identitas objek">
+  <div class="identity-main"><div><div class="identity-badges"><span class="badge">{{ icon('shop' if a.kind == 'BKU' else 'people') }}{{ 'Bangunan/usaha (BKU)' if a.kind == 'BKU' else a.kind }}</span><span class="existence-badge">{{ a.kind|existence_label(a.existence) }}</span></div><h1>{{ a.name }}</h1><p class="location-line">{{ region.village }} · {{ region.name }} <span>· {{ a.members }} ART · {{ a.businesses }} usaha</span></p></div><div class="identity-building"><small>BANGUNAN</small><strong>{{ a.building or '—' }}</strong></div></div>
+  <details class="identity-extra"><summary>Identitas sumber {{ icon('down') }}</summary><div><span>{{ region.district }}</span><span>Status sumber: {{ a.status }}</span><span>Versi: {{ a.version }}</span><span class="code">{{ a.source_id }}</span></div></details>
+</section>
+<div class="detail-layout" data-block-viewer aria-label="Pembaca blok form SE2026">
+  <aside class="block-nav"><span class="eyebrow">BLOK PADA FORM SE2026</span>{% for key, block_config in blocks.items() %}{% if not block_config.is_form %}<span class="nav-divider">INFORMASI PORTAL</span>{% endif %}<a href="#block-{{ key }}" data-open-section="block-{{ key }}"><span>{{ block_config.badge if block_config.badge else icon(block_config.icon) }}</span>{{ block_config.title }}</a>{% endfor %}<div class="aside-note">Versi data sumber<strong>{{ a.version }}</strong><p>Susunan mengikuti form SE2026 versi 7.1.2 sebagai data pendukung PES SE2026.</p></div></aside>
+  <div class="blocks">
+    <div class="reader-object-context">{{ a.name }} <span>· Bangunan {{ a.building or '—' }}</span></div>
+    <div class="viewer-toolbar"><label for="section-jump">Lompat ke bagian</label><select id="section-jump">{% for key, block_config in blocks.items() %}<option value="block-{{ key }}">{{ block_config.title }}</option>{% endfor %}</select><span class="viewer-position" data-block-position role="status" aria-live="polite"></span><button class="button small-button reader-focus-toggle" data-reader-focus type="button" aria-pressed="false" aria-label="Perbesar area baca" hidden>{{ icon('expand') }}<span>Perbesar</span></button></div>
+    <progress class="viewer-progress" data-block-progress max="{{ blocks|length }}" value="1" aria-label="Posisi bagian"></progress>
+    <div class="slide-stage" data-slide-stage>
+    {% for key, block_config in blocks.items() %}
+    {% set restricted = key in private_blocks and not sensitive %}
+    <details class="info-block {{ 'portal-section' if not block_config.is_form else '' }}" id="block-{{ key }}" data-section="{{ key }}" {% if block_config.available %}data-block="{{ url_for('web.block', pk=a.id, block=key) }}"{% endif %} {% if restricted %}data-restricted="1"{% endif %}>
+      <summary><span class="block-letter">{{ block_config.badge if block_config.badge else icon(block_config.icon) }}</span><span class="block-summary-text"><strong>{{ block_config.title }}</strong><small>{% if not block_config.available %}Tidak tercakup dalam file ekstraksi{% elif restricted %}Memerlukan izin informasi sensitif{% elif key in ('i','iii') %}{{ block_config.description }} · {{ a.members }} ART{% elif key == 'ii' %}{{ block_config.description }} · {{ a.businesses }} usaha{% else %}{{ block_config.description }}{% endif %}</small></span><span class="chevron">{{ icon('down') }}</span></summary>
+      <div class="block-body" aria-live="polite">{% if restricted %}<p class="notice subtle">Akun Anda belum memiliki akses ke informasi pada bagian ini. Hubungi administrator untuk memeriksa kewenangan akses.</p>{% elif not block_config.available %}<p class="notice subtle">Bagian {{ block_config.title }} ada pada form referensi, tetapi kolomnya tidak disertakan dalam file ekstraksi yang tersedia. Ketiadaan data ini tidak berarti bagian tersebut kosong atau tidak berlaku pada pendataan.</p>{% else %}<p class="muted loading">Memuat rincian…</p><noscript><a href="{{ url_for('web.block', pk=a.id, block=key) }}">Buka rincian {{ block_config.title }}</a></noscript>{% endif %}</div>
+    </details>
+    {% endfor %}
+    </div>
+    <nav class="slide-controls" aria-label="Pindah blok" hidden data-slide-controls><button class="button" type="button" data-block-prev>{{ icon('back') }} Sebelumnya</button><span class="slide-hint">Geser atau pilih blok</span><button class="button primary" type="button" data-block-next>Berikutnya {{ icon('arrow') }}</button></nav>
+  </div>
+</div>
+{% endblock %}

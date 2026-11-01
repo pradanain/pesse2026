@@ -1,0 +1,21 @@
+# Opt-in override. Attach to your existing Traefik network and HTTPS resolver.
+services:
+  portal:
+    environment:
+      COOKIE_SECURE: "1"
+      TRUST_PROXY: "1"
+    networks:
+      - default
+      - proxy
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: ${TRAEFIK_NETWORK:-traefik}
+      traefik.http.routers.se2026.rule: Host(`${PORTAL_HOST:?Isi PORTAL_HOST}`)
+      traefik.http.routers.se2026.entrypoints: websecure
+      traefik.http.routers.se2026.tls: "true"
+      traefik.http.routers.se2026.tls.certresolver: ${TRAEFIK_RESOLVER:-letsencrypt}
+      traefik.http.services.se2026.loadbalancer.server.port: "8000"
+networks:
+  proxy:
+    external: true
+    name: ${TRAEFIK_NETWORK:-traefik}

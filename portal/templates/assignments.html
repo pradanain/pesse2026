@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}{{ region.name }} · Data keluarga dan usaha{% endblock %}
+{% block content %}
+<div data-live-search class="compact-directory">
+{% set root_url = url_for('web.regions', **({'q':request.args.get('wilayah_q',''),'district':request.args.get('kecamatan','')} if request.args.get('wilayah_q') or request.args.get('kecamatan') else {})) %}
+{% set region_context = {'wilayah_q':request.args.get('wilayah_q',''),'kecamatan':request.args.get('kecamatan','')} %}
+<nav class="breadcrumb" aria-label="Jejak navigasi"><a href="{{ root_url }}">Wilayah kerja</a>{{ icon('chevron-right') }}<span aria-current="page">{{ region.name }}</span></nav>
+<div class="page-heading"><div><span class="eyebrow">POST ENUMERATION SURVEY</span><h1>{{ region.name }}</h1><p class="location-line">{{ icon('map') }} {{ region.village }} <span>·</span> {{ region.district }}</p><p class="code">{{ region.code }}</p></div><span class="count-tag" data-search-total><b>{{ count }}</b> objek sumber</span></div>
+<div class="directory-tools"><form class="filters" method="get" role="search" aria-label="Pencarian keluarga dan usaha" data-live-form>
+  {% for key,value in region_context.items() %}{% if value %}<input type="hidden" name="{{ key }}" value="{{ value }}">{% endif %}{% endfor %}
+  <input type="hidden" name="kind" value="{{ request.args.get('kind','') }}">
+  <label class="search-caption" for="q">Temukan data keluarga atau usaha</label>
+  <div class="search-row"><div class="search-field">{{ icon('search') }}<input id="q" name="q" type="search" placeholder="Nama, nomor bangunan, atau kode objek" value="{{ request.args.get('q','') }}" aria-controls="search-results" aria-describedby="search-status" autocomplete="off"><button type="button" class="search-clear" aria-label="Hapus kata pencarian" data-search-clear hidden>×</button></div><button class="button primary" type="submit">Cari data {{ icon('arrow') }}</button></div>
+  <details class="advanced-filters" {% if request.args.get('existence') or request.args.get('review') or request.args.get('sort') == 'name' %}open{% endif %}>
+    <summary>{{ icon('filter') }}<span>Filter dan urutan</span><span class="chevron">{{ icon('down') }}</span></summary>
+    <div class="filter-options"><div class="filter-control"><label for="existence">Status keberadaan</label><select id="existence" name="existence"><option value="">Semua status</option>{% for s in statuses %}<option value="{{ s }}" {{ 'selected' if request.args.get('existence') == s else '' }}>{{ status_labels.get(s,s) }}</option>{% endfor %}</select></div><div class="filter-control"><label for="sort">Urutkan berdasarkan</label><select id="sort" name="sort"><option value="building">Nomor bangunan</option><option value="name" {{ 'selected' if request.args.get('sort') == 'name' else '' }}>Nama objek</option></select></div><label class="checkbox"><input type="checkbox" name="review" value="1" {{ 'checked' if request.args.get('review') == '1' else '' }}> Data perlu diperiksa</label><button class="button" type="submit">Terapkan filter</button></div>
+  </details>
+</form>
+<div class="search-feedback"><p id="search-status" class="search-status" role="status" aria-live="polite" aria-atomic="true" data-search-status data-idle="Hasil berubah otomatis saat Anda mengetik atau memilih filter.">Cari berdasarkan nama, nomor bangunan, atau kode objek.</p><button class="button small-button" type="button" data-search-retry hidden>Coba lagi</button></div>
+</div>
+<div id="search-results" data-search-results>
+<nav class="filter-chips" aria-label="Jenis objek">
+  {% for value,text in [('', 'Semua objek'),('Keluarga','Keluarga'),('BKU','Bangunan/usaha')] %}<a class="filter-chip {{ 'selected' if request.args.get('kind','') == value }}" href="{{ url_for('web.assignments', code=region.code, **dict(request.args.to_dict(), kind=value, page=1)) }}" {% if request.args.get('kind','') == value %}aria-current="true"{% endif %}>{{ icon('people' if value == 'Keluarga' else 'shop' if value == 'BKU' else 'files') }}{{ text }}</a>{% endfor %}
+  {% if request.args.get('q') or request.args.get('kind') or request.args.get('existence') or request.args.get('review') or request.args.get('sort') == 'name' %}<a class="reset-link" href="{{ url_for('web.assignments', code=region.code, **region_context) }}">Hapus filter</a>{% endif %}
+</nav>
+<div class="section-line"><div><h2>Data keluarga dan usaha</h2></div><span class="result-count">{{ (page-1)*page_size+1 if count else 0 }}–{{ [page*page_size,count]|min }} dari {{ count }} objek</span></div>
+{% if assignments %}<div class="object-list-heading" aria-hidden="true"><span>Nama / identitas sumber</span><span>Bangunan</span><span>Jenis objek</span><span>ART / Usaha</span><span>Status / catatan</span><span></span></div>{% endif %}
+<div class="assignment-grid">
+{% for a in assignments %}
+  <a class="assignment-card" href="{{ url_for('web.detail', pk=a.id, **request.args.to_dict()) }}">
+    <div class="object-name"><h3>{{ a.name }}</h3><span class="code assignment-code">{{ a.source_id }}</span></div>
+    <span class="building-label">Bangunan <b>{{ a.building or '—' }}</b></span>
+    <span class="badge {{ 'neutral' if a.kind == 'BKU' }}">{{ icon('shop' if a.kind == 'BKU' else 'people') }}{{ 'Bangunan/usaha' if a.kind == 'BKU' else a.kind }}</span>
+    <div class="assignment-counts"><span>{{ icon('people') }}<b>{{ a.members }}</b> ART</span><span>{{ icon('shop') }}<b>{{ a.businesses }}</b> usaha</span></div>
+    <div class="object-status"><p class="existence-text">{{ a.kind|existence_label(a.existence) }}</p>{% if a.issues %}<span class="review-badge">{{ icon('info') }}{{ a.issues|length }} catatan perlu diperiksa</span>{% else %}<span class="record-status">Status sumber: {{ a.status }}</span>{% endif %}</div>
+    <span class="row-open">Buka {{ icon('arrow') }}</span>
+  </a>
+{% else %}<div class="empty"><span class="empty-icon">{{ icon('search') }}</span><h3>Data belum ditemukan</h3><p>Coba kata pencarian yang lebih singkat atau sesuaikan filter.</p><a class="button" href="{{ url_for('web.assignments', code=region.code, **region_context) }}">Tampilkan semua objek</a></div>{% endfor %}
+</div>
+{% if pages > 1 %}<nav class="pagination" aria-label="Halaman hasil">{% if page > 1 %}<a class="button" href="{{ url_for('web.assignments', code=region.code, **dict(request.args.to_dict(), page=page-1)) }}">{{ icon('back') }} Sebelumnya</a>{% endif %}<span>Halaman <b>{{ page }}</b> / {{ pages }}</span>{% if page < pages %}<a class="button" href="{{ url_for('web.assignments', code=region.code, **dict(request.args.to_dict(), page=page+1)) }}">Berikutnya {{ icon('arrow') }}</a>{% endif %}</nav>{% endif %}
+</div>
+<div class="purpose-note">{{ icon('info') }}<p>Nama, jenis objek, status, dan jumlah anggota/usaha mengikuti data SE2026 yang tersedia sebagai pendukung PES SE2026.</p></div>
+</div>
+{% endblock %}

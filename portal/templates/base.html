@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#172d3d">
+  <meta name="description" content="Data hasil SE2026 sebagai bahan pendukung kegiatan PES SE2026 di Kabupaten Bulungan.">
+  <title>{% block title %}Data Pendukung{% endblock %} · PES SE2026</title>
+  <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='images/logo-se2026-hq.jpg', v='pes-audit-17') }}">
+  {% for stylesheet in ['app.css','layouts.css','controls.css','reader.css'] %}<link rel="stylesheet" href="{{ url_for('static', filename=stylesheet, v='pes-audit-17') }}">{% endfor %}
+  <script defer src="{{ url_for('static', filename='controls.js', v='pes-audit-17') }}"></script>
+  <script defer src="{{ url_for('static', filename='app.js', v='pes-audit-17') }}"></script>
+  <script defer src="{{ url_for('static', filename='block-viewer.js', v='pes-audit-17') }}"></script>
+  {% if request.endpoint == 'web.commitment' %}<link rel="stylesheet" href="{{ url_for('static', filename='commitment.css', v='privacy-1') }}"><script defer src="{{ url_for('static', filename='commitment.js', v='privacy-1') }}"></script>{% endif %}
+</head>
+<body class="{{ 'login-page' if request.endpoint == 'web.login' else '' }}">
+<a class="skip" href="#main">Langsung ke isi</a>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="{{ url_for('web.regions') }}" aria-label="Beranda data pendukung PES SE2026">
+      <span class="brand-logo brand-logo-hq"><img src="{{ url_for('static', filename='images/logo-se2026-hq.jpg') }}" alt="Sensus Ekonomi 2026" width="1080" height="1350"></span>
+      <span class="brand-title"><strong>PES SE2026</strong><small>Post Enumeration Survey</small></span>
+    </a>
+    {% if g.user and request.endpoint != 'web.commitment' %}
+    <nav class="main-nav" aria-label="Navigasi utama">
+      <a class="nav-link {{ 'active' if request.endpoint in ['web.regions','web.assignments','web.detail'] }}" href="{{ url_for('web.regions') }}" {% if request.endpoint == 'web.regions' %}aria-current="page"{% endif %}>{{ icon('map') }}<span>Wilayah kerja</span></a>
+      {% if config.AUTH_REQUIRED %}<span class="account-summary"><b>{{ {'admin':'Administrator','pml':'PML / Pengawas','ppl':'PPL / Pencacah'}.get(g.user.role, 'Petugas') }}</b><small>{{ g.user.username }}</small></span><form action="{{ url_for('web.logout') }}" method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="button quiet" type="submit">Keluar</button></form>{% endif %}
+    </nav>
+    {% endif %}
+  </div>
+</header>
+<main id="main" class="container">{% block content %}{% endblock %}</main>
+<footer class="footer credit-footer"><div><span>© 2026 BPS Kabupaten Bulungan</span><span>Made with <span aria-label="love">♥</span> and <span aria-label="coffee">☕</span> by Novanni Indi Pradana</span></div></footer>
+</body>
+</html>

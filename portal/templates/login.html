@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Masuk{% endblock %}
+{% block content %}
+<div class="login-layout clean-login">
+  <section class="login-story">
+    <h1>PES SE2026</h1>
+    <p>Post Enumeration Survey (PES) SE2026 adalah survei yang dilakukan setelah Sensus Ekonomi 2026 untuk mengetahui kualitas hasil pendataan melalui pencacahan ulang pada wilayah terpilih.</p>
+    <figure class="login-photo"><picture><source media="(min-width: 761px)" srcset="{{ url_for('static', filename='images/pelatihan-pes-se2026-web.jpg', v='web1') }}"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Foto bersama peserta pelatihan petugas PES SE2026 Kabupaten Bulungan" width="1200" height="676" fetchpriority="high"></picture><figcaption>Pelatihan petugas PES SE2026 · Kabupaten Bulungan</figcaption></figure>
+  </section>
+  <section class="login-card" aria-labelledby="login-heading">
+    <h2 id="login-heading">Masuk ke portal</h2>
+    <p class="muted">Gunakan akun petugas Anda.</p>
+    {% if error %}<div class="notice warning" role="alert">{{ error }}</div>{% endif %}
+    <form method="post">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="username">Email petugas</label>
+      <input id="username" name="username" type="email" value="{{ username }}" placeholder="nama@contoh.id" autocomplete="username" required maxlength="80" autofocus>
+      <label for="password">Kata sandi</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required maxlength="512">
+      <button class="button primary wide" type="submit">Masuk ke portal {{ icon('arrow') }}</button>
+    </form>
+    <p class="login-note">Akses mengikuti alokasi wilayah Anda.</p>
+  </section>
+</div>
+{% endblock %}

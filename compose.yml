@@ -1,0 +1,22 @@
+services:
+  portal:
+    build: .
+    ports:
+      - "127.0.0.1:${PORTAL_PORT:-6502}:8000"
+    environment:
+      DATABASE_URL: sqlite:////app/instance/portal.sqlite3
+      SECRET_KEY: ${SECRET_KEY:?Isi SECRET_KEY pada .env sebelum menjalankan Compose}
+      COOKIE_SECURE: ${COOKIE_SECURE:-0}
+      TRUST_PROXY: ${TRUST_PROXY:-0}
+      AUTH_REQUIRED: ${AUTH_REQUIRED:-1}
+    volumes:
+      - portal_data:/app/instance
+      - ${EXCEL_DIR:-.}:/data:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/ready', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+volumes:
+  portal_data:

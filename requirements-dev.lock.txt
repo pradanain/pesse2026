@@ -1,0 +1,11 @@
+-r requirements.lock.txt
+beautifulsoup4==4.15.0
+iniconfig==2.3.1
+packaging==26.3
+playwright==1.64.1
+pluggy==1.7.0
+pyee==13.0.1
+Pygments==2.21.0
+pypdf==6.21.4
+pytest==9.2.0
+soupsieve==3.0.4

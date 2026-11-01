@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Wilayah kerja{% endblock %}
+{% block content %}
+<div data-live-search class="compact-directory">
+<div class="directory-intro"><span class="eyebrow">POST ENUMERATION SURVEY</span><h1>Portal PES SE2026</h1><p>PES merupakan survei ulang untuk mengevaluasi kualitas hasil Sensus Ekonomi 2026. Telusuri data keluarga dan usaha sebagai bahan pendukung tugas Anda di Kabupaten Bulungan.</p></div>
+{% if config.AUTH_REQUIRED and g.user.role in ('pml','ppl') %}<p class="allocation-note">{{ icon('check') }}{% if g.user.role == 'pml' %}Wilayah mengikuti alokasi PPL yang Anda awasi.{% else %}Wilayah yang tampil hanya SLS alokasi Anda.{% endif %}</p>{% endif %}
+<section class="overview compact-overview" aria-label="Cakupan data pendukung">
+  <div><span class="metric-icon">{{ icon('map') }}</span><span><strong class="overview-number">{{ region_total }}</strong><small>SLS / Sub-SLS</small></span></div>
+  <div><span class="metric-icon">{{ icon('files') }}</span><span><strong class="overview-number">{{ '{:,}'.format(total).replace(',', '.') }}</strong><small>Objek pada data sumber</small></span></div>
+  <div><span class="metric-icon">{{ icon('people') }}</span><span><strong class="overview-number">{{ '{:,}'.format(member_total).replace(',', '.') }}</strong><small>Baris anggota keluarga</small></span></div>
+  <div><span class="metric-icon">{{ icon('shop') }}</span><span><strong class="overview-number">{{ '{:,}'.format(business_total).replace(',', '.') }}</strong><small>Baris roster usaha</small></span></div>
+</section>
+<section id="wilayah" class="region-directory">
+  <div class="section-line"><div><span class="eyebrow">TELUSURI DATA</span><h2>Wilayah kerja</h2></div><span class="result-count" data-search-total>{{ regions|length }} SLS ditampilkan</span></div>
+  <div class="directory-tools"><form class="search-panel" method="get" role="search" aria-label="Pencarian wilayah" data-live-form>
+    <div class="search-field"><label class="sr-only" for="q">Cari wilayah</label>{{ icon('search') }}<input id="q" name="q" type="search" placeholder="Cari kecamatan, desa, nama atau kode SLS" value="{{ q }}" aria-controls="search-results" aria-describedby="search-status" autocomplete="off"><button type="button" class="search-clear" aria-label="Hapus kata pencarian" data-search-clear hidden>×</button></div>
+    <label class="sr-only" for="district">Kecamatan</label><select id="district" name="district"><option value="">Semua kecamatan</option>{% for d in districts %}<option {{ 'selected' if district == d else '' }}>{{ d }}</option>{% endfor %}</select>
+    <button class="button primary" type="submit">Cari wilayah {{ icon('arrow') }}</button>
+    <a class="reset-link" href="{{ url_for('web.regions') }}#wilayah" data-search-reset {% if not q and not district %}hidden{% endif %}>Hapus filter</a>
+  </form>
+  <div class="search-feedback"><p id="search-status" class="search-status" role="status" aria-live="polite" aria-atomic="true" data-search-status data-idle="Ketik nama atau kode wilayah untuk mencari otomatis.">Gunakan nama atau kode wilayah untuk mencari.</p><button class="button small-button" type="button" data-search-retry hidden>Coba lagi</button></div>
+  </div>
+  <div id="search-results" data-search-results>
+  {% for district_group in regions|groupby('district') %}
+  <section class="district-group"><h3 class="district-name">{{ icon('map') }} {{ district_group.grouper }}<span>{{ district_group.list|length }} SLS</span></h3><div class="region-grid">
+    {% for r in district_group.list %}{% set c = counts.get(r.code, (0,0,0,0)) %}
+    <a class="region-card" href="{{ url_for('web.assignments', code=r.code, **({'wilayah_q':q,'kecamatan':district} if q or district else {})) }}">
+      <div class="region-name"><h3>{{ r.name }}</h3><p class="region-village">{{ r.village }}</p><p class="code">{{ r.code }}</p></div>
+      <div class="region-stats"><div><strong>{{ c[0] }}</strong><small>Objek sumber</small></div><div><strong>{{ c[1] or 0 }}</strong><small>Keluarga</small></div><div><strong>{{ c[2] or 0 }}</strong><small>Bangunan/usaha</small></div></div>
+      <span class="row-open">Telusuri {{ icon('arrow') }}</span>
+    </a>
+    {% endfor %}
+  </div></section>
+  {% else %}<div class="empty"><span class="empty-icon">{{ icon('search') }}</span><h3>Wilayah belum ditemukan</h3><p>Coba nama wilayah lain atau hapus filter pencarian.</p>{% if q or district %}<a class="button" href="{{ url_for('web.regions') }}#wilayah">Tampilkan semua wilayah</a>{% endif %}</div>{% endfor %}
+  </div>
+</section>
+<div class="purpose-note">{{ icon('info') }}<p><strong>Tentang data ini</strong>Data yang ditampilkan merupakan hasil SE2026 untuk mendukung kegiatan PES SE2026. Jumlah pada portal menunjukkan cakupan data sumber.</p></div>
+</div>
+{% endblock %}

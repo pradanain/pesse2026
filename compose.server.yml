@@ -1,0 +1,83 @@
+name: pesse2026
+x-image: &image ${PORTAL_IMAGE:-ghcr.io/pradanain/pesse2026:latest}
+services:
+  initialize:
+    image: *image
+    user: '0:0'
+    command: ['python', '/app/deploy/initialize.py']
+    environment:
+      DATABASE_URL: sqlite:////app/instance/portal.sqlite3
+      AUTH_REQUIRED: '1'
+    volumes:
+      - portal_data:/app/instance
+      - ./private/seed:/seed:ro
+      - ./private/backups:/backups
+    cap_drop: [ALL]
+    cap_add: [CHOWN, SETUID, SETGID, DAC_OVERRIDE]
+    security_opt: [no-new-privileges:true]
+    labels:
+      traefik.enable: 'false'
+  portal:
+    image: *image
+    build: .
+    depends_on:
+      initialize:
+        condition: service_completed_successfully
+    restart: unless-stopped
+    init: true
+    environment:
+      DATABASE_URL: sqlite:////app/instance/portal.sqlite3
+      AUTH_REQUIRED: '1'
+      COOKIE_SECURE: '1'
+      TRUST_PROXY: '1'
+    volumes:
+      - portal_data:/app/instance
+    expose: ['8000']
+    networks: [proxy]
+    read_only: true
+    tmpfs: ['/tmp:rw,noexec,nosuid,size=64m']
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    healthcheck:
+      test: ['CMD', 'python', '-c', "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/ready', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      start_period: 20s
+      retries: 3
+    labels:
+      traefik.enable: 'true'
+      traefik.docker.network: ${TRAEFIK_NETWORK:-proxy}
+      traefik.http.routers.pesse2026.rule: Host(`pesse.databenuanta.id`)
+      traefik.http.routers.pesse2026.entrypoints: ${TRAEFIK_ENTRYPOINT:-web}
+      traefik.http.routers.pesse2026.service: pesse2026
+      traefik.http.routers.pesse2026.middlewares: pesse2026-origin
+      traefik.http.services.pesse2026.loadbalancer.server.port: '8000'
+      traefik.http.middlewares.pesse2026-origin.headers.customrequestheaders.X-Forwarded-Proto: https
+      traefik.http.middlewares.pesse2026-origin.headers.customrequestheaders.X-Forwarded-Host: pesse.databenuanta.id
+    logging:
+      driver: json-file
+      options: {max-size: '10m', max-file: '3'}
+  backup:
+    image: *image
+    depends_on:
+      portal:
+        condition: service_healthy
+    command: ['python', '/app/deploy/backup_loop.py']
+    restart: unless-stopped
+    volumes:
+      - portal_data:/app/instance:ro
+      - ./private/backups:/backups
+    network_mode: none
+    read_only: true
+    tmpfs: ['/tmp:rw,noexec,nosuid,size=128m']
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    logging:
+      driver: json-file
+      options: {max-size: '5m', max-file: '2'}
+volumes:
+  portal_data:
+networks:
+  proxy:
+    external: true
+    name: ${TRAEFIK_NETWORK:-proxy}

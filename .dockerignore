@@ -1,0 +1,11 @@
+*
+!requirements.txt
+!requirements.lock.txt
+!wsgi.py
+!portal/
+!portal/**
+!deploy/
+!deploy/**
+!scripts/
+!scripts/backup_local.py
+**/__pycache__/

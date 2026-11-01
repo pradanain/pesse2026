@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Komitmen kerahasiaan data{% endblock %}
+{% block content %}
+<div class="commitment-stage">
+  <dialog open class="commitment-dialog" data-commitment aria-modal="true" aria-labelledby="commitment-title" aria-describedby="commitment-intro commitment-copy">
+    <form id="commitment-exit" method="post" action="{{ url_for('web.logout') }}" data-commitment-exit>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button class="commitment-close" type="submit" aria-label="Tutup dan keluar dari portal" title="Tutup dan keluar">×</button>
+    </form>
+    <div class="commitment-emblem" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6l-8-3Z"/><path d="m8 12 3 3 5-6"/></svg></div>
+    <h1 id="commitment-title" tabindex="-1">Komitmen kerahasiaan data</h1>
+    <p id="commitment-intro" class="commitment-intro">Di balik setiap data, ada kepercayaan responden yang perlu kita jaga.</p>
+    <p id="commitment-copy">Informasi dalam portal ini hanya digunakan untuk mendukung pelaksanaan PES SE2026. Jaga kerahasiaannya dan jangan membagikan data, tangkapan layar, maupun akses akun kepada pihak yang tidak berwenang.</p>
+    <div class="commitment-actions">
+      <button class="button quiet" type="submit" form="commitment-exit">Keluar</button>
+      <form method="post" action="{{ url_for('web.commitment', next=destination) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="button primary" name="decision" value="accept" type="submit">Saya memahami dan berkomitmen {{ icon('check') }}</button>
+      </form>
+    </div>
+    <p class="commitment-hint">Menutup dialog akan mengeluarkan Anda dari portal.</p>
+  </dialog>
+</div>
+{% endblock %}

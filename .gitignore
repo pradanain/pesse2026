@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.xlsx
+*.sqlite3*
+instance/
+.env
+private/
+artifacts/
+dist/
+*.tar.gz
+*.zip
+deploy.env
+dependency-audit.json

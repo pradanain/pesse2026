@@ -1,0 +1,22 @@
+.commitment-stage { min-height: 60dvh; }
+.commitment-dialog { position: fixed; inset: 0; margin: auto; box-sizing: border-box; width: min(560px, calc(100% - 32px)); max-height: calc(100dvh - 32px); overflow-y: auto; border: 1px solid #dce4eb; border-radius: 20px; padding: 36px; color: var(--ink, #172d3d); background: #fff; box-shadow: 0 24px 80px #172d3d26; }
+.commitment-dialog::backdrop { background: #172d3da6; backdrop-filter: blur(4px); }
+.commitment-dialog h1 { margin: 20px 0 14px; font-size: clamp(22px, 4.8vw, 26px); line-height: 1.25; font-weight: 700; letter-spacing: -.5px; }
+.commitment-dialog h1:focus { outline: none; }
+.commitment-dialog p { margin: 0 0 16px; font-size: 14px; line-height: 1.75; color: #526779; }
+.commitment-dialog .commitment-intro { font-size: 16px; color: #243e50; font-weight: 500; }
+.commitment-emblem { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 15px; color: #b9440e; background: #fff1e6; }
+.commitment-emblem svg { width: 28px; height: 28px; }
+.commitment-close { position: absolute; right: 14px; top: 14px; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 10px; background: transparent; color: #627487; font: 28px/1 sans-serif; cursor: pointer; }
+.commitment-close:hover { color: #172d3d; background: #f1f5f8; }
+.commitment-close:focus-visible { outline: 3px solid #d65c20; outline-offset: 2px; }
+.commitment-actions { display: flex; gap: 10px; margin-top: 26px; padding-top: 22px; border-top: 1px solid #e5ebf0; }
+.commitment-actions form { flex: 1; }
+.commitment-actions .button { min-height: 46px; font-size: 13px; line-height: 1.4; }
+.commitment-actions form .button { width: 100%; }
+.commitment-dialog .commitment-hint { margin: 14px 0 0; font-size: 11px; color: #627487; text-align: center; }
+@media (max-width: 480px) {
+  .commitment-dialog { padding: 28px 22px 22px; border-radius: 16px; }
+  .commitment-actions { flex-direction: column-reverse; margin-top: 22px; padding-top: 18px; }
+  .commitment-actions > .button { width: 100%; }
+}

@@ -1,0 +1,74 @@
+/* Questionnaire reading area. */
+.viewer-page .topbar-inner { padding-top: 7px; padding-bottom: 7px; }
+.viewer-page .brand-logo.brand-logo-hq { width: 32px; height: 40px; }
+.viewer-page .brand-title strong { font-size: 17px; }
+.viewer-page .brand-title small { margin-top: 3px; font-size: 9px; }
+.viewer-page .brand { gap: 12px; }
+.viewer-page .container { padding-top: 6px; padding-bottom: 8px; }
+.viewer-page .detail-topline { margin-bottom: 5px; min-height: 28px; }
+.viewer-page .detail-topline .back-link { min-height: 28px; }
+.viewer-page .detail-topline .review-notice { margin: 0; padding: 4px 8px; min-height: 28px; gap: 7px; }
+.viewer-page .review-notice > .icon { width: 15px; height: 15px; }
+.viewer-page .compact-identity .identity-main { padding: 8px 14px; gap: 12px; }
+.viewer-page .identity-main > div:first-child { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 3px 18px; flex: 1; }
+.viewer-page .compact-identity h1 { grid-column: 1; grid-row: 1; font-size: 20px; margin: 0; }
+.viewer-page .compact-identity .identity-badges { grid-column: 2; grid-row: 1; }
+.viewer-page .compact-identity .location-line { grid-column: 1 / -1; grid-row: 2; margin: 0; line-height: 1.5; }
+.viewer-page .compact-identity .identity-building { padding: 5px 9px; min-width: 56px; }
+.viewer-page .compact-identity .identity-building strong { font-size: 21px; }
+.viewer-page .identity-extra summary { min-height: 25px; }
+.slides-ready.detail-layout { margin-top: 8px; gap: 18px; }
+.slides-ready .viewer-toolbar { margin-bottom: 6px; }
+.slides-ready .viewer-progress { margin-bottom: 7px; }
+.slides-ready .info-block > summary { min-height: 58px; padding: 9px 15px; margin-bottom: 12px; }
+.slides-ready .block-letter { width: 30px; height: 30px; }
+.slides-ready .block-body > .source-section:first-child { padding-top: 0; border-top: 0; }
+.slides-ready .source-section h4 { margin-bottom: 13px; }
+.slides-ready .field-grid { row-gap: 16px; }
+.slides-ready .slide-controls { padding-top: 7px; }
+.reader-focus-toggle { flex-shrink: 0; min-height: 44px; }
+.reader-focus .compact-identity, .reader-focus .detail-topline { display: none; }
+.reader-focus .topbar { display: none; }
+.viewer-page.reader-focus .container { height: 100dvh; max-width: 1500px; padding-top: 8px; }
+.slides-ready .info-block > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; border-radius: 10px 10px 0 0; }
+.reader-focus .detail-layout { margin-top: 0; grid-template-columns: minmax(0,1fr); }
+.reader-focus .block-nav { display: none; }
+.reader-focus .viewer-toolbar label { display: block; }
+@media (min-width: 761px) {
+  .viewer-page .compact-identity { position: relative; overflow: visible; }
+  .viewer-page .compact-identity .location-line { padding-right: 120px; }
+  .viewer-page .identity-extra { border: 0; padding: 0; }
+  .viewer-page .identity-extra > summary { position: absolute; right: 84px; bottom: 7px; padding: 2px 5px; font-size: 10px; }
+  .viewer-page .identity-extra > div { position: absolute; z-index: 15; right: 10px; top: calc(100% + 6px); max-width: min(540px, 90vw); max-height: 140px; padding: 13px 16px; border: 1px solid var(--border); border-radius: 9px; background: white; box-shadow: 0 8px 25px #172d3d18; }
+}
+@media (max-width: 1100px) {
+  .viewer-page .compact-identity .identity-badges { display: none; }
+  .viewer-page .identity-main > div:first-child { grid-template-columns: minmax(0,1fr); }
+}
+@media (max-width: 760px) {
+  .viewer-page .topbar-inner { flex-wrap: nowrap; padding: 7px 12px; gap: 8px; }
+  .viewer-page .brand { gap: 8px; }
+  .viewer-page .brand-title { padding-left: 8px; }
+  .viewer-page .brand-title strong { font-size: 15px; }
+  .viewer-page .brand-title small { font-size: 8px; }
+  .viewer-page .main-nav { width: auto; margin: 0 0 0 auto; padding: 0; border: 0; gap: 6px; }
+  .viewer-page .main-nav .nav-link { flex: none; padding: 9px; }
+  .viewer-page .main-nav .nav-link span, .viewer-page .account-summary { display: none; }
+  .viewer-page .main-nav form .button { padding: 8px; }
+  .viewer-page .compact-identity h1 { font-size: 17px; }
+  .viewer-page .compact-identity .identity-main { padding: 7px 10px; }
+  .viewer-page .compact-identity .location-line > span { display: inline; width: auto; }
+  .viewer-page .identity-extra summary { min-height: 24px; }
+  .viewer-page .detail-topline .review-notice strong { font-size: 10px; }
+  .slides-ready .info-block > summary { min-height: 54px; padding: 8px 12px; }
+  .slides-ready .detail-topline { gap: 8px; }
+  .reader-focus-toggle { width: 40px; min-width: 40px; padding: 8px; }
+  .reader-focus-toggle > span { display: none; }
+  .viewer-toolbar { gap: 6px; }
+  .viewer-position { font-size: 10px; }
+  .reader-focus .viewer-toolbar label { display: none; }
+}
+
+.reader-object-context { display: none; }
+.reader-focus .reader-object-context { display: block; flex-shrink: 0; font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 2px 0 8px; }
+.reader-object-context span { font-weight: 400; color: var(--muted); }

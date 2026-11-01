@@ -1,0 +1,5331 @@
+{
+  "template": "UMKM",
+  "form_version": "7.1.2",
+  "references": [
+    {
+      "file": "Metadata SQL LAB - SE2026 (1).xlsx",
+      "sha256": "a807a1934577d9c97172958828d52d995e632ceb93b73bd5f21ece374f53745e"
+    },
+    {
+      "file": "SE2026.html",
+      "sha256": "8a887811b4506643f50f48ee7136368f17288642d88c891b2331a13dc3459812"
+    },
+    {
+      "file": "Eksplorasi Data Sensus Ekonomi 2026 dengan SQL Lab(1).pdf",
+      "sha256": "3c5e1eea6cc7d1f06ceb8c21b0667cd1324e552453c9d044144c30bbbfca9d18"
+    }
+  ],
+  "metadata_sheets": [
+    {
+      "sheet": "tgr_fd68e454.base_table_assignm",
+      "rows": 82
+    },
+    {
+      "sheet": "tgr_fd68e454.base_table_assig_1",
+      "rows": 12
+    },
+    {
+      "sheet": "tgr_fd68e454.base_table_assig_2",
+      "rows": 26
+    },
+    {
+      "sheet": "tgr_fd68e454.base_table_paradat",
+      "rows": 15
+    },
+    {
+      "sheet": "tgr_fd68e454.base_table_user_al",
+      "rows": 19
+    },
+    {
+      "sheet": "tgr_fd68e454.base_table_user__1",
+      "rows": 5
+    },
+    {
+      "sheet": "tgr_fd68e454.kp_nested",
+      "rows": 56
+    },
+    {
+      "sheet": "tgr_fd68e454.nested_dtsen",
+      "rows": 70
+    },
+    {
+      "sheet": "tgr_fd68e454.nested_dtsen_var",
+      "rows": 120
+    },
+    {
+      "sheet": "tgr_fd68e454.nested_meteran",
+      "rows": 50
+    },
+    {
+      "sheet": "tgr_fd68e454.pair_label_value_0",
+      "rows": 42
+    },
+    {
+      "sheet": "tgr_fd68e454.pair_label_value_1",
+      "rows": 43
+    },
+    {
+      "sheet": "tgr_fd68e454.root_table",
+      "rows": 311
+    },
+    {
+      "sheet": "tgr_fd68e454.se2026_nested",
+      "rows": 275
+    },
+    {
+      "sheet": "tcz_37526b20.base_table_assignm",
+      "rows": 82
+    },
+    {
+      "sheet": "tcz_37526b20.base_table_assig_1",
+      "rows": 12
+    },
+    {
+      "sheet": "tcz_37526b20.base_table_assig_2",
+      "rows": 26
+    },
+    {
+      "sheet": "tcz_37526b20.base_table_paradat",
+      "rows": 15
+    },
+    {
+      "sheet": "tcz_37526b20.base_table_user_al",
+      "rows": 19
+    },
+    {
+      "sheet": "tcz_37526b20.base_table_user__1",
+      "rows": 5
+    },
+    {
+      "sheet": "tcz_37526b20.pair_label_value_0",
+      "rows": 42
+    },
+    {
+      "sheet": "tcz_37526b20.pusat_nested",
+      "rows": 56
+    },
+    {
+      "sheet": "tcz_37526b20.root_table",
+      "rows": 273
+    },
+    {
+      "sheet": "_METADATA_TEMPLATE",
+      "rows": 835
+    },
+    {
+      "sheet": "_METADATA_DEFAULT",
+      "rows": 52
+    }
+  ],
+  "pdf_page_count": 43,
+  "pdf_reference_pages": {
+    "29": "Sensus Ekonomi 2026 TABEL ISIAN KUESIONER Struktur database isian kuesioner terbagi menjadi tiga kategori utama tabel: Isian Non-Roster Tabel root_table Digunakan untuk mengorganisir data jawaban tunggal: ● Menampung seluruh variabel pertanyaan tunggal di luar bentuk roster. Isian Roster Nama tabel dinamis (dari dataKey) Menyesuaikan konteks masing-masing survei: ● Skema TCZ: pusat_nested ● Skema TGR: se2026_nested, kp_nested, nested_dtsen, nested_meteran ● Didesain khusus untuk menangani struktur data dinamis berulang. Multiple-Value Tabel pair_label_value_... Sistem penyimpanan spesifik untuk tipe pilihan ganda: ● Menyimpan jawaban dari inputan bertipe Checkbox, Multiselect, atau List Text/Select Repeat secara vertikal. ● Komponen pembentuk data: assignment_id, data_key, value, pair_label, pair_value & index...",
+    "30": "Sensus Ekonomi 2026 STRUKTUR KOLOM TABEL ISIAN Setiap kolom pada tabel isian kuesioner dibentuk secara sistematis berdasarkan tipe pertanyaannya:  Standard & Kunci Identitas Kunci & Input Dasar: Setiap baris tabel otomatis memiliki assignment_id dan assignment_date_modified sebagai pengikat relasi utama. Untuk tipe teks, numerik, atau variabel, kolom dibentuk langsung dari dataKey yang berfungsi sebagai id unik setiap rincian pertanyaan pada FASIH Form.  Tipe Pilihan (Opsi) Pertanyaan Berbentuk Opsi: Untuk tipe pertanyaan pilihan seperti radio button atau select, struktur kolom dipecah menjadi: ● dataKey_label: teks yang tampil pada pilihan/option. ● dataKey_value: id unik dari pilihan tersebut. Memisahkan antara representasi teks visual dengan nilai data riil yang disimpan.  Geotag & File Pertanyaan Kompleks: Tipe Geotag: ● dataKey_latitude (garis lintang) ● dataKey_longitude (garis bujur) ● dataKey_accuracy (tingkat akurasi GPS) Tipe File: ● dataKey_filename (nama file dokumen) ● dataKey_uri (simpan di perangkat petugas) ● dataKey_url (lokasi penyimpanan di server)",
+    "32": "Sensus Ekonomi 2026 STRUKTUR IDENTIFIER UNIK ROSTER Setiap item pada tabel roster diidentifikasi secara unik menggunakan sistem indeks bertingkat:  Struktur Indeks Roster Identifier Unik Bertingkat: Tabel roster menggunakan kombinasi kolom index untuk menentukan posisi unik baris data dalam hubungan hierarkis: ● Roster Level 1: Diidentifikasi secara unik oleh kolom index1. ● Roster Level 2: Diidentifikasi secara unik oleh kombinasi kolom index1 dan index2. Sistem ini terus berlanjut secara bertingkat (index3, dst.) sesuai dengan kedalaman percabangan roster kuesioner.  Karakteristik Autoincrement Sifat Nilai Indeks: Kolom index1 dibentuk menggunakan mekanisme Auto-Increment secara internal oleh Fasih Form. Konsekuensi Penting: ● Urutan nilai indeks bisa saja tidak berurutan secara mulus (terdapat gap atau lompatan angka). ● Kondisi ini terjadi akibat adanya proses penghapusan baris, modifikasi berulang, atau penumpukan versi data roster di aplikasi Fasih.",
+    "34": "STRUKTUR DATA PERTANYAAN CHECKBOX Penyimpanan jawaban bertipe checkbox/multiselect secara vertikal berdasarkan lingkup roster: Skema Varian Tabel Jawaban checkbox disimpan secara terpisah dalam tabel spesifik pair_label_value berdasarkan kedalaman tingkat rostering: ● Di Luar Roster: Tersimpan pada tabel pair_label_value_0. ● Roster Level 1: Tersimpan pada tabel pair_label_value_1. ● Roster Level 2: Tersimpan pada tabel pair_label_value_2, dan seterusnya mengikuti hierarki percabangan instrumen. Aturan Kolom Identiﬁkasi Setiap baris data checkbox diidentifikasi secara unik dan memuat informasi jawaban melalui kolom berikut: ● Kunci Identifikasi Utama: Ditentukan oleh kombinasi unik kolom data_key. ● Kunci Indeks Bertingkat: Khusus untuk tabel _1 dan _2 dst, wajib disertakan kolom index1, index2, dst untuk mengaitkan ke baris roster yang tepat. ● pair_label: Menyimpan label teks opsi pilihan checkbox (misal: nama komoditas/kegiatan). ● pair_value: Menyimpan nilai jawaban terpilih (boolean/pilihan biner). Sensus Ekonomi 2026",
+    "38": "ATURAN QUERY DATA SENSUS EKONOMI 2026 Aturan 1: Wajib melakukan JOIN ke base_table_assignment dan filter is_active = 1 Sensus Ekonomi 2026 Status Aktif & Integrasi Untuk menjamin data yang ditarik hanya data valid yang belum dihapus oleh petugas di lapangan, query Anda wajib merujuk ke status transaksi penugasan induk. Poin Kunci Aturan: ● Simple Join: Cukup hubungkan tabel isian/kuesioner ke tabel induk menggunakan kolom assignment_id. ● Filter is_active: Wajib menyertakan kondisi penyaringan is_active = 1 pada tabel assignment. ● Integritas Data: Mencegah kemunculan record sampah atau draf kuesioner yang telah dihapus. Contoh Implementasi SQL Gunakan contoh sintaks SQL berikut sebagai panduan standar penyusunan kueri di SQL Lab: SELECT a.assignment_id, a.data_key, a.value FROM root_table a INNER JOIN base_table_assignment b ON a.assignment_id = b.assignment_id WHERE b.is_active = 1;",
+    "39": "ATURAN QUERY DATA SENSUS EKONOMI 2026 Aturan 2: Wajib JOIN root_table ke tabel roster menggunakan assignment_id dan assignment_date_modified Validasi Histori Roster Sistem Fasih tidak menghapus item roster secara fisik dari database saat dihapus oleh petugas, melainkan menumpuk modifikasinya secara historis. Kunci tanggal modifikasi wajib disertakan. Poin Kunci Aturan: ● Multi-Key Join: Wajib menghubungkan tabel dengan menyertakan kolom assignment_id dan assignment_date_modified secara bersamaan. ● Proteksi Integritas: Memastikan data roster yang ditarik adalah versi termutakhir dan masih berstatus valid di lapangan. ● Hindari Duplikasi: Melewatkan kunci modifikasi tanggal akan mengakibatkan penggelembungan baris (data ganda) pada hasil query. Contoh Implementasi SQL Gunakan contoh standard penulisan query berikut untuk melakukan join ke tabel roster level 1: SELECT a.assignment_id, r. data_key, r.value FROM root_table a INNER JOIN roster_l1 r ON a.assignment_id = r.assignment_id AND a.assignment_date_modified = r.assignment_date_modified; Sensus Ekonomi 2026",
+    "40": "ATURAN QUERY DATA SENSUS EKONOMI 2026 Aturan 3: Wajib JOIN ke tabel referensi usaha_ref menggunakan assignment_id dan assignment_date_modified Filter Target Usaha Valid Untuk mendapatkan data UMKM dan usaha keluarga yang valid, query Anda wajib terhubung ke tabel referensi induk guna menyaring record non-target di lapangan. Penyebab Duplikasi & Anomali Terfilter: ● Prelist Usaha Besar (UB): Mengeliminasi data prelist UB yang bukan merupakan target dari pendataan usaha UMKM. ● Usaha Tidak Terpeta: Menyaring usaha yang tidak terpetakan hingga tingkat SLS yang match dengan assignment baru. ● Usaha Keluarga Ganda: Menghindari overlap dengan menyaring usaha yang match dengan usaha keluarga dalam satu SLS. Contoh Implementasi SQL Gunakan contoh standard penulisan query berikut untuk melakukan join penyaringan ke tabel referensi usaha: SELECT a.assignment_id, r.data_key, r.value FROM root_table a INNER JOIN USAHA_REF u ON a.assignment_id = u.assignment_id AND a.assignment_date_modified = u.assignment_date_modified; Sensus Ekonomi 2026"
+  },
+  "form_sections": [
+    {
+      "data_key": "b0",
+      "title": "PENGANTAR",
+      "position": 1
+    },
+    {
+      "data_key": "b1_p",
+      "title": "IDENTITAS WILAYAH",
+      "position": 28
+    },
+    {
+      "data_key": "b5",
+      "title": "SE2026 - P",
+      "position": 53
+    },
+    {
+      "data_key": "b_ak",
+      "title": "SE2026 - L BLOK I",
+      "position": 159
+    },
+    {
+      "data_key": "blokl",
+      "title": "SE2026 - L BLOK II",
+      "position": 236
+    },
+    {
+      "data_key": "b_ak_lanjutan",
+      "title": "SE2026 - L BLOK III",
+      "position": 507
+    },
+    {
+      "data_key": "b_perumahan",
+      "title": "SE2026 - L BLOK IV",
+      "position": 588
+    },
+    {
+      "data_key": "ket_jawaban",
+      "title": "KETERANGAN PEMBERI JAWABAN",
+      "position": 689
+    },
+    {
+      "data_key": "cat",
+      "title": "CATATAN",
+      "position": 701
+    },
+    {
+      "data_key": "anomali_section",
+      "title": "ANOMALI USAHA",
+      "position": 723
+    },
+    {
+      "data_key": "anomali_keluarga",
+      "title": "ANOMALI KELUARGA",
+      "position": 763
+    }
+  ],
+  "fields": {
+    "ada_bang_usaha_value": {
+      "data_key": "ada_bang_usaha",
+      "label": "Keberadaan bangunan lainnya/usaha",
+      "question": "Keberadaan Bangunan Lainnya/ Usaha",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "2": "Baru",
+        "7": "Data diperoleh dari Kantor Pusat (KP)",
+        "0": "Tidak Ditemukan",
+        "1": "Ditemukan",
+        "3": "Tutup",
+        "4": "Ganda"
+      },
+      "options_kind": "literal-source-option",
+      "source_option": "kode_bangunan_new",
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 43,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 105,
+      "form_rosters": [],
+      "source_files": [
+        "master_assignment.xlsx"
+      ]
+    },
+    "ada_keluarga_value": {
+      "data_key": "ada_keluarga",
+      "label": "Keberadaan keluarga",
+      "question": "Keberadaan Keluarga",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "2": "Baru",
+        "4": "Tidak Eligible",
+        "0": "Tidak Ditemukan (STOP)",
+        "3": "Meninggal",
+        "1": "Ditemukan",
+        "5": "Tidak dapat ditemui sampai akhir pendataan",
+        "6": "Keluarga Khusus"
+      },
+      "options_kind": "literal-source-option",
+      "source_option": "kode_keluarga_new",
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 42,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 103,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx",
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx",
+        "SCREENING_USAHA_KELUARGA.xlsx",
+        "identitas_keluarga.xlsx",
+        "master_assignment.xlsx"
+      ]
+    },
+    "air_minum_label": {
+      "data_key": "air_minum",
+      "label": "Sumber air minum",
+      "question": "Apakah sumber air utama yang digunakan keluarga untuk minum?",
+      "section": "SE2026 - L BLOK IV",
+      "number": "12",
+      "type": "Radio Group",
+      "options": {
+        "01": "Air kemasan bermerk",
+        "02": "Air isi ulang",
+        "03": "Leding",
+        "04": "Sumur bor/pompa",
+        "05": "Sumur terlindung",
+        "06": "Sumur tak terlindung",
+        "07": "Mata air terlindung",
+        "08": "Mata air tak terlindung",
+        "09": "Air permukaan (sungai/danau/waduk/kolam/irigasi)",
+        "10": "Air hujan",
+        "11": "Lainnya"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 339,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 614,
+      "form_rosters": [],
+      "source_files": [
+        "RUMAH_SANITASI_FASILITAS.xlsx"
+      ]
+    },
+    "alamat_prelist": {
+      "data_key": "alamat_prelist",
+      "label": "Alamat prelist",
+      "question": "Alamat (Prelist)",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Text Area",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 44,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 106,
+      "form_rosters": [],
+      "source_files": [
+        "identitas_keluarga.xlsx"
+      ]
+    },
+    "alamat_usaha_utama": {
+      "data_key": "alamat_usaha_utama",
+      "label": "Alamat utama usaha",
+      "question": "b1. Alamat/lokasi usaha utama",
+      "section": "SE2026 - L BLOK II",
+      "number": "9",
+      "type": "Text Area",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 139,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 291,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx"
+      ]
+    },
+    "alamat_usaha_view": {
+      "data_key": "alamat_usaha_view",
+      "label": "Alamat usaha tercatat",
+      "question": "Alamat usaha/perusahaan",
+      "section": "SE2026 - L BLOK II",
+      "number": "8c",
+      "type": "Text Area",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 125,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 272,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx"
+      ]
+    },
+    "art_ada_usaha_value": {
+      "data_key": "art_ada_usaha",
+      "label": "Kepemilikan usaha anggota",
+      "question": "Apakah $NAME$ memiliki usaha$label_berikut? $daftar_usaha",
+      "section": "SE2026 - L BLOK I",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 87,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak",
+      "form_position": 220,
+      "form_rosters": [
+        "nested_dtsen"
+      ],
+      "source_files": [
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx",
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "assignment_date_modified": {
+      "data_key": "assignment_date_modified",
+      "label": "Versi data sumber",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": "Tanggal Assignment Terakhir Diubah",
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx",
+        "IDENTITAS_USAHA_ROSTER.xlsx",
+        "KEGIATAN_KBLI_USAHA.xlsx",
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx",
+        "PENDAPATAN_PER_ART.xlsx",
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx",
+        "RUMAH_SANITASI_FASILITAS.xlsx",
+        "SCREENING_USAHA_KELUARGA.xlsx",
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx",
+        "identitas_keluarga.xlsx",
+        "master_assignment.xlsx",
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "assignment_id": {
+      "data_key": "assignment_id",
+      "label": "Kode assignment",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": "ID Assignment",
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx",
+        "IDENTITAS_USAHA_ROSTER.xlsx",
+        "KEGIATAN_KBLI_USAHA.xlsx",
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx",
+        "PENDAPATAN_PER_ART.xlsx",
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx",
+        "RUMAH_SANITASI_FASILITAS.xlsx",
+        "SCREENING_USAHA_KELUARGA.xlsx",
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx",
+        "identitas_keluarga.xlsx",
+        "master_assignment.xlsx",
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "assignment_status_alias": {
+      "data_key": "assignment_status_alias",
+      "label": "Status assignment",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": "Status Assignment",
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "master_assignment.xlsx"
+      ]
+    },
+    "biaya_pembelian": {
+      "data_key": "biaya_pembelian",
+      "label": "Biaya pembelian barang yang terjual",
+      "question": "c. Biaya pembelian barang yang terjual",
+      "section": "SE2026 - L BLOK II",
+      "number": "26",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 215,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 415,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "biaya_produksi": {
+      "data_key": "biaya_produksi",
+      "label": "Biaya produksi",
+      "question": "b. Biaya produksi",
+      "section": "SE2026 - L BLOK II",
+      "number": "26",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 214,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 414,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "bln_lahir_value": {
+      "data_key": "bln_lahir",
+      "label": "Bulan lahir",
+      "question": "• Bulan Lahir",
+      "section": "SE2026 - L BLOK I",
+      "number": null,
+      "type": "Select",
+      "options": {
+        "01": "01 - JANUARI",
+        "02": "02 - FEBRUARI",
+        "03": "03 - MARET",
+        "04": "04 - APRIL",
+        "05": "05 - MEI",
+        "06": "06 - JUNI",
+        "07": "07 - JULI",
+        "08": "08 - AGUSTUS",
+        "09": "09 - SEPTEMBER",
+        "10": "10 - OKTOBER",
+        "11": "11 - NOVEMBER",
+        "12": "12 - DESEMBER",
+        "98": "98 - TIDAK TAHU"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 84,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak",
+      "form_position": 216,
+      "form_rosters": [
+        "nested_dtsen"
+      ],
+      "source_files": [
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "buang_tinja_label": {
+      "data_key": "buang_tinja",
+      "label": "Pembuangan akhir tinja",
+      "question": "Di manakah tempat pembuangan akhir tinja?",
+      "section": "SE2026 - L BLOK IV",
+      "number": "11",
+      "type": "Radio Group",
+      "options": {
+        "1": "Tangki septik",
+        "2": "Instalasi Pengolahan Air Limbah (IPAL)",
+        "3": "Kolam/sawah/sungai/danau/laut",
+        "4": "Lubang tanah",
+        "5": "Pantai/tanah lapang/kebun",
+        "6": "Lainnya"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 338,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 611,
+      "form_rosters": [],
+      "source_files": [
+        "RUMAH_SANITASI_FASILITAS.xlsx"
+      ]
+    },
+    "bukti_kepemilikan_label": {
+      "data_key": "bukti_kepemilikan",
+      "label": "Bukti kepemilikan",
+      "question": "b. Jika tempat tinggal milik sendiri , apa jenis bukti kepemilikan tanah bangunan tempat tinggal ini?",
+      "section": "SE2026 - L BLOK IV",
+      "number": "3",
+      "type": "Radio Group",
+      "options": {
+        "1": "Sertifikat hak milik (SHM)",
+        "2": "Sertifikat selain SHM (SHGB, SHSRS)",
+        "3": "Surat bukti lainnya (Girik, Letter C, dll)",
+        "4": "Tidak Punya"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 325,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 597,
+      "form_rosters": [],
+      "source_files": [
+        "RUMAH_SANITASI_FASILITAS.xlsx"
+      ]
+    },
+    "catatan": {
+      "data_key": "catatan",
+      "label": "Catatan asli pendataan",
+      "question": "Catatan",
+      "section": "CATATAN",
+      "number": null,
+      "type": "Text Area",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 380,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "cat",
+      "form_position": 704,
+      "form_rosters": [],
+      "source_files": [
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx",
+        "SCREENING_USAHA_KELUARGA.xlsx"
+      ]
+    },
+    "cek_kbli_pml_value": {
+      "data_key": "cek_kbli_pml",
+      "label": "Pemeriksaan kategori dan KBLI oleh PML",
+      "question": "Cek Kategori & KBLI (Diisi oleh PML)",
+      "section": "SE2026 - L BLOK II",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "1": "Sudah dicek"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 172,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 354,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "KEGIATAN_KBLI_USAHA.xlsx"
+      ]
+    },
+    "code_identity": {
+      "data_key": "code_identity",
+      "label": "Kode identitas",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": "Kode Identitas",
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx",
+        "IDENTITAS_USAHA_ROSTER.xlsx",
+        "KEGIATAN_KBLI_USAHA.xlsx",
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx",
+        "PENDAPATAN_PER_ART.xlsx",
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx",
+        "RUMAH_SANITASI_FASILITAS.xlsx",
+        "SCREENING_USAHA_KELUARGA.xlsx",
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx",
+        "identitas_keluarga.xlsx",
+        "master_assignment.xlsx",
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "current_user_fullname": {
+      "data_key": "current_user_fullname",
+      "label": "Petugas terakhir",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": null,
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "master_assignment.xlsx"
+      ]
+    },
+    "date_modified": {
+      "data_key": "date_modified",
+      "label": "Waktu pembaruan sumber",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": null,
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "master_assignment.xlsx"
+      ]
+    },
+    "desa_kelurahan": {
+      "data_key": "desa_kelurahan",
+      "label": "Desa/kelurahan",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": null,
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "VALIDASI_KODE_SLS.xlsx"
+      ]
+    },
+    "dtsen_nama_kk": {
+      "data_key": "dtsen_nama_kk",
+      "label": "Nama kepala keluarga (prelist)",
+      "question": "a. Nama Kepala Keluarga",
+      "section": "SE2026 - L BLOK III",
+      "number": "1",
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 266,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 509,
+      "form_rosters": [],
+      "source_files": [
+        "identitas_keluarga.xlsx"
+      ]
+    },
+    "dtsen_no_kk": {
+      "data_key": "dtsen_no_kk",
+      "label": "Nomor KK (prelist)",
+      "question": "c. Nomor kartu keluarga",
+      "section": "SE2026 - L BLOK III",
+      "number": "1",
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 267,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 511,
+      "form_rosters": [],
+      "source_files": [
+        "identitas_keluarga.xlsx"
+      ]
+    },
+    "ec_art_pendapatan": {
+      "data_key": "ec_art_pendapatan",
+      "label": "Kriteria keberadaan ART untuk pertanyaan pendapatan",
+      "question": "ec_art_pendapatan",
+      "section": "",
+      "number": null,
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 557,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 528,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDAPATAN_PER_ART.xlsx"
+      ]
+    },
+    "flag_pbi": {
+      "data_key": "flag_pbi",
+      "label": "Penanda PBI dari sumber",
+      "question": "PBI",
+      "section": "",
+      "number": null,
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 467,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 68,
+      "form_rosters": [],
+      "source_files": [
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx"
+      ]
+    },
+    "foto_depan_p_url": {
+      "data_key": "foto_depan_p_url",
+      "label": "Foto tampak depan (harus mencakup atap dan dinding)",
+      "question": "Foto tampak depan (harus mencakup atap dan dinding)",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 123,
+      "form_rosters": [],
+      "source_files": [
+        "master_assignment.xlsx"
+      ]
+    },
+    "foto_depan_url": {
+      "data_key": "foto_depan_url",
+      "label": "Foto tampak depan (harus mencakup atap dan dinding)",
+      "question": "Foto tampak depan (harus mencakup atap dan dinding)",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 679,
+      "form_rosters": [],
+      "source_files": [
+        "RUMAH_SANITASI_FASILITAS.xlsx"
+      ]
+    },
+    "foto_ruang_tamu_url": {
+      "data_key": "foto_ruang_tamu_url",
+      "label": "Foto ruang tamu (harus mencakup dinding dan lantai)",
+      "question": "Foto ruang tamu (harus mencakup dinding dan lantai)",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 680,
+      "form_rosters": [],
+      "source_files": [
+        "RUMAH_SANITASI_FASILITAS.xlsx"
+      ]
+    },
+    "gaji": {
+      "data_key": "gaji",
+      "label": "Upah, gaji, dan jaminan sosial pegawai",
+      "question": "a. Total upah dan gaji, serta jaminan sosial pegawai",
+      "section": "SE2026 - L BLOK II",
+      "number": "26",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 213,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 413,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "geotag_accuracy": {
+      "data_key": "geotag_accuracy",
+      "label": "Akurasi geotagging (m)",
+      "question": "Geotagging",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 122,
+      "form_rosters": [],
+      "source_files": [
+        "master_assignment.xlsx"
+      ]
+    },
+    "geotag_latitude": {
+      "data_key": "geotag_latitude",
+      "label": "Latitude",
+      "question": "Geotagging",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 122,
+      "form_rosters": [],
+      "source_files": [
+        "master_assignment.xlsx"
+      ]
+    },
+    "geotag_longitude": {
+      "data_key": "geotag_longitude",
+      "label": "Longitude",
+      "question": "Geotagging",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 122,
+      "form_rosters": [],
+      "source_files": [
+        "master_assignment.xlsx"
+      ]
+    },
+    "hasilPemadananNIK": {
+      "data_key": "hasilPemadananNIK",
+      "label": "Hasil pemeriksaan/pemadanan NIK",
+      "question": "Hasil Pengecekkan NIK",
+      "section": "",
+      "number": null,
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 567,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak",
+      "form_position": 198,
+      "form_rosters": [
+        "nested_dtsen"
+      ],
+      "source_files": [
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "hortikultura_value": {
+      "data_key": "hortikultura",
+      "label": "Hortikultura",
+      "question": "Apakah $namaKK atau anggota keluarga dari $namaKK selama setahun yang lalu mengelola usaha pertanian Hortikultura dengan tujuan sebagian atau seluruh hasilnya untuk dijual/ditukar?",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 63,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 134,
+      "form_rosters": [],
+      "source_files": [
+        "SCREENING_USAHA_KELUARGA.xlsx"
+      ]
+    },
+    "hp": {
+      "data_key": "hp",
+      "label": "Nomor HP",
+      "question": "• Nomor HP/whatsapp:",
+      "section": "SE2026 - L BLOK II",
+      "number": null,
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 133,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 284,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx"
+      ]
+    },
+    "hubungan_label": {
+      "data_key": "hubungan",
+      "label": "Hubungan dengan kepala keluarga",
+      "question": "Hubungan $NAME$ dengan Kepala Keluarga",
+      "section": "SE2026 - L BLOK I",
+      "number": "8",
+      "type": "Radio Group",
+      "options": {
+        "1": "Kepala Keluarga",
+        "2": "Istri/Suami",
+        "3": "Anak",
+        "4": "Menantu",
+        "5": "Cucu",
+        "6": "Orang Tua",
+        "7": "Mertua",
+        "8": "Famili",
+        "9": "Lainnya"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 75,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak",
+      "form_position": 203,
+      "form_rosters": [
+        "nested_dtsen"
+      ],
+      "source_files": [
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "hubungan_value": {
+      "data_key": "hubungan",
+      "label": "Hubungan dengan kepala keluarga",
+      "question": "Hubungan $NAME$ dengan Kepala Keluarga",
+      "section": "SE2026 - L BLOK I",
+      "number": "8",
+      "type": "Radio Group",
+      "options": {
+        "1": "Kepala Keluarga",
+        "2": "Istri/Suami",
+        "3": "Anak",
+        "4": "Menantu",
+        "5": "Cucu",
+        "6": "Orang Tua",
+        "7": "Mertua",
+        "8": "Famili",
+        "9": "Lainnya"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 75,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak",
+      "form_position": 203,
+      "form_rosters": [
+        "nested_dtsen"
+      ],
+      "source_files": [
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "ijazah_label": {
+      "data_key": "ijazah",
+      "label": "Ijazah/STTB tertinggi",
+      "question": "Ijazah/STTB tertinggi yang dimiliki $NAME$ (usia 5 tahun ke atas) Ijazah/STTB tertinggi di prelist: $ijazah",
+      "section": "SE2026 - L BLOK III",
+      "number": "15",
+      "type": "Radio Group",
+      "options": {
+        "00": "Tidak punya ijazah SD",
+        "01": "SD/sederajat",
+        "02": "SMP/sederajat",
+        "03": "SMA/sederajat",
+        "04": "D1/D2/D3",
+        "05": "D4/S1/Profesi",
+        "06": "S2/S3"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 274,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 534,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx"
+      ]
+    },
+    "ijazah_prelist": {
+      "data_key": "ijazah_prelist",
+      "label": "Ijazah tertinggi pada prelist",
+      "question": "Ijazah Prelist",
+      "section": "",
+      "number": null,
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 564,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 533,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx"
+      ]
+    },
+    "ijazah_value": {
+      "data_key": "ijazah",
+      "label": "Ijazah/STTB tertinggi",
+      "question": "Ijazah/STTB tertinggi yang dimiliki $NAME$ (usia 5 tahun ke atas) Ijazah/STTB tertinggi di prelist: $ijazah",
+      "section": "SE2026 - L BLOK III",
+      "number": "15",
+      "type": "Radio Group",
+      "options": {
+        "00": "Tidak punya ijazah SD",
+        "01": "SD/sederajat",
+        "02": "SMP/sederajat",
+        "03": "SMA/sederajat",
+        "04": "D1/D2/D3",
+        "05": "D4/S1/Profesi",
+        "06": "S2/S3"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 274,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 534,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx"
+      ]
+    },
+    "index1": {
+      "data_key": "index1",
+      "label": "Indeks roster sumber",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": "ID Roster/Nested Level 1",
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx",
+        "KEGIATAN_KBLI_USAHA.xlsx",
+        "PENDAPATAN_PER_ART.xlsx",
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx",
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx",
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "input": {
+      "data_key": "input",
+      "label": "Input/bahan baku",
+      "question": "d. Apa input yang digunakan? Contoh: daging ikan, tepung; daging kebab, kulit kebab, sayuran; bambu; jagung pipil; kaca; kain; kulit sapi; kayu bulat; rotan; kunci polos",
+      "section": "SE2026 - L BLOK II",
+      "number": "13",
+      "type": "Text Area",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 166,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 333,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "KEGIATAN_KBLI_USAHA.xlsx"
+      ]
+    },
+    "isprelistart": {
+      "data_key": "isprelistart",
+      "label": "Penanda anggota keluarga dari prelist",
+      "question": "Apakah prelist art",
+      "section": "",
+      "number": null,
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 553,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak",
+      "form_position": 187,
+      "form_rosters": [
+        "nested_dtsen"
+      ],
+      "source_files": [
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "jalan_domisili": {
+      "data_key": "jalan_domisili",
+      "label": "Jalan domisili",
+      "question": "Nama Jalan/Gang/Komplek/Gedung/dll (Tuliskan dengan rinci)",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Text Area",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 45,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 108,
+      "form_rosters": [],
+      "source_files": [
+        "identitas_keluarga.xlsx"
+      ]
+    },
+    "jasa_pertanian_value": {
+      "data_key": "jasa_pertanian",
+      "label": "Jasa pertanian",
+      "question": "Apakah $namaKK atau anggota keluarga dari $namaKK selama setahun yang lalu mengelola usaha pertanian Jasa Pertanian dengan tujuan sebagian atau seluruh hasilnya untuk dijual/ditukar?",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 68,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 139,
+      "form_rosters": [],
+      "source_files": [
+        "SCREENING_USAHA_KELUARGA.xlsx"
+      ]
+    },
+    "jenis_prelist": {
+      "data_key": "jenis_prelist",
+      "label": "Jenis prelist",
+      "question": "Jenis Prelist",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 30,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 67,
+      "form_rosters": [],
+      "source_files": [
+        "master_assignment.xlsx"
+      ]
+    },
+    "jenis_usaha_label": {
+      "data_key": "jenis_usaha",
+      "label": "Jenis usaha",
+      "question": "a. Apa jenis usaha/perusahaan ini?",
+      "section": "SE2026 - L BLOK II",
+      "number": "9",
+      "type": "Radio Group",
+      "options": {
+        "1": "Usaha di dalam bangunan tempat tinggal",
+        "2": "Usaha keliling",
+        "3": "Usaha di luar bangunan tempat tinggal dengan lokasi tetap dan perlengkapan usaha dipindah/dibongkar pasang",
+        "4": "Usaha konstruksi perorangan, usaha pertambangan dan penggalian perorangan",
+        "5": "Usaha persewaan rumah/kamar/kantor",
+        "6": "Usaha pertanian"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 138,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 289,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "KEGIATAN_KBLI_USAHA.xlsx"
+      ]
+    },
+    "jenis_usaha_value": {
+      "data_key": "jenis_usaha",
+      "label": "Jenis usaha",
+      "question": "a. Apa jenis usaha/perusahaan ini?",
+      "section": "SE2026 - L BLOK II",
+      "number": "9",
+      "type": "Radio Group",
+      "options": {
+        "1": "Usaha di dalam bangunan tempat tinggal",
+        "2": "Usaha keliling",
+        "3": "Usaha di luar bangunan tempat tinggal dengan lokasi tetap dan perlengkapan usaha dipindah/dibongkar pasang",
+        "4": "Usaha konstruksi perorangan, usaha pertambangan dan penggalian perorangan",
+        "5": "Usaha persewaan rumah/kamar/kantor",
+        "6": "Usaha pertanian"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 138,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 289,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "KEGIATAN_KBLI_USAHA.xlsx"
+      ]
+    },
+    "jk_dtsen_label": {
+      "data_key": "jk_dtsen",
+      "label": "Jenis kelamin",
+      "question": "Jenis Kelamin $NAME$",
+      "section": "SE2026 - L BLOK I",
+      "number": "12",
+      "type": "Radio Group",
+      "options": {
+        "1": "Laki-laki",
+        "2": "Perempuan"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 82,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak",
+      "form_position": 213,
+      "form_rosters": [
+        "nested_dtsen"
+      ],
+      "source_files": [
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "jk_dtsen_value": {
+      "data_key": "jk_dtsen",
+      "label": "Jenis kelamin",
+      "question": "Jenis Kelamin $NAME$",
+      "section": "SE2026 - L BLOK I",
+      "number": "12",
+      "type": "Radio Group",
+      "options": {
+        "1": "Laki-laki",
+        "2": "Perempuan"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 82,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak",
+      "form_position": 213,
+      "form_rosters": [
+        "nested_dtsen"
+      ],
+      "source_files": [
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "jml_ak_tinggal": {
+      "data_key": "jml_ak_tinggal",
+      "label": "Jumlah keluarga yang tinggal dalam satu rumah",
+      "question": "a. Berapa jumlah keluarga yang tinggal dalam 1 rumah/tempat tinggal?",
+      "section": "SE2026 - L BLOK IV",
+      "number": "2",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 321,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 593,
+      "form_rosters": [],
+      "source_files": [
+        "RUMAH_SANITASI_FASILITAS.xlsx",
+        "identitas_keluarga.xlsx"
+      ]
+    },
+    "jml_kk": {
+      "data_key": "jml_kk",
+      "label": "Jumlah keluarga (awal)",
+      "question": "a. Jumlah anggota keluarga sesuai KK",
+      "section": "SE2026 - L BLOK III",
+      "number": "2",
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 268,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 512,
+      "form_rosters": [],
+      "source_files": [
+        "identitas_keluarga.xlsx"
+      ]
+    },
+    "jml_kk_update": {
+      "data_key": "jml_kk_update",
+      "label": "Jumlah keluarga dalam bangunan",
+      "question": "b. Jumlah anggota keluarga sesuai hasil pendataan Jumlah anggota keluarga dnegan status keberadaan kode 1/3/4/5",
+      "section": "SE2026 - L BLOK III",
+      "number": "2",
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 270,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 514,
+      "form_rosters": [],
+      "source_files": [
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx",
+        "SCREENING_USAHA_KELUARGA.xlsx",
+        "identitas_keluarga.xlsx"
+      ]
+    },
+    "jml_meteran": {
+      "data_key": "jml_meteran",
+      "label": "Jumlah meteran listrik",
+      "question": "a. Jika listrik PLN dengan meteran , berapa banyak unit meteran listrik yang terpasang di rumah ini?",
+      "section": "SE2026 - L BLOK IV",
+      "number": "14",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 341,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 616,
+      "form_rosters": [],
+      "source_files": [
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx",
+        "RUMAH_SANITASI_FASILITAS.xlsx"
+      ]
+    },
+    "jns_atap_label": {
+      "data_key": "jns_atap",
+      "label": "Jenis atap",
+      "question": "a. Apakah bahan bangunan utama atap rumah terluas?",
+      "section": "SE2026 - L BLOK IV",
+      "number": "8",
+      "type": "Radio Group",
+      "options": {
+        "1": "Beton",
+        "2": "Genteng",
+        "3": "Seng",
+        "4": "Asbes",
+        "5": "Bambu",
+        "6": "Kayu/sirap",
+        "7": "Jerami/ijuk/daun daunan/rumbia",
+        "8": "Lainnya"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 334,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 607,
+      "form_rosters": [],
+      "source_files": [
+        "RUMAH_SANITASI_FASILITAS.xlsx"
+      ]
+    },
+    "jns_bangunan_label": {
+      "data_key": "jns_bangunan",
+      "label": "Jenis bangunan",
+      "question": "a. Apa jenis bangunan tempat tinggal yang ditempati?",
+      "section": "SE2026 - L BLOK IV",
+      "number": "1",
+      "type": "Radio Group",
+      "options": {
+        "1": "Rumah tunggal",
+        "2": "Rumah deret",
+        "3": "Rumah susun",
+        "4": "Apartemen",
+        "5": "Lainnya"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 318,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 590,
+      "form_rosters": [],
+      "source_files": [
+        "RUMAH_SANITASI_FASILITAS.xlsx"
+      ]
+    },
+    "jns_closet_label": {
+      "data_key": "jns_closet",
+      "label": "Jenis kloset",
+      "question": "Apakah jenis kloset yang digunakan?",
+      "section": "SE2026 - L BLOK IV",
+      "number": "10",
+      "type": "Radio Group",
+      "options": {
+        "1": "Leher angsa",
+        "2": "Plengsengan dengan tutup",
+        "3": "Plengsengan tanpa tutup",
+        "4": "Cemplung/cubluk"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 337,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 610,
+      "form_rosters": [],
+      "source_files": [
+        "RUMAH_SANITASI_FASILITAS.xlsx"
+      ]
+    },
+    "jns_dinding_label": {
+      "data_key": "jns_dinding",
+      "label": "Jenis dinding",
+      "question": "a. Apakah bahan bangunan utama dinding rumah terluas?",
+      "section": "SE2026 - L BLOK IV",
+      "number": "7",
+      "type": "Radio Group",
+      "options": {
+        "1": "Tembok",
+        "2": "Plesteran anyaman bambu/kawat",
+        "3": "Kayu/Papan/Gypsum/GRC/Calciboard",
+        "4": "Anyaman bambu",
+        "5": "Batang kayu",
+        "6": "Bambu",
+        "7": "Lainnya"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 332,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 605,
+      "form_rosters": [],
+      "source_files": [
+        "RUMAH_SANITASI_FASILITAS.xlsx"
+      ]
+    },
+    "jns_lantai_label": {
+      "data_key": "jns_lantai",
+      "label": "Jenis lantai",
+      "question": "a. Apakah bahan bangunan utama lantai rumah terluas?",
+      "section": "SE2026 - L BLOK IV",
+      "number": "6",
+      "type": "Radio Group",
+      "options": {
+        "1": "Marmer/granit",
+        "2": "Keramik",
+        "3": "Parket/vinil/permadani",
+        "4": "Ubin/tegel/traso",
+        "5": "Kayu/papan",
+        "6": "Semen/bata merah",
+        "7": "Bambu",
+        "8": "Tanah",
+        "9": "Lainnya"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 330,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 603,
+      "form_rosters": [],
+      "source_files": [
+        "RUMAH_SANITASI_FASILITAS.xlsx"
+      ]
+    },
+    "jumlah_ac_new": {
+      "data_key": "jumlah_ac_new",
+      "label": "Jumlah AC",
+      "question": "Air Conditioner (AC) (unit)",
+      "section": "SE2026 - L BLOK IV",
+      "number": "d",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 353,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 660,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx"
+      ]
+    },
+    "jumlah_ak": {
+      "data_key": "jumlah_ak",
+      "label": "Jumlah anggota keluarga yang menetap",
+      "question": "Jumlah Anggota Keluarga Yang menetap di dalam bangunan tempat tinggal minimal 1 tahun, atau kurang dari 1 tahun dan berniat menetap",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 55,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 125,
+      "form_rosters": [],
+      "source_files": [
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx",
+        "SCREENING_USAHA_KELUARGA.xlsx",
+        "identitas_keluarga.xlsx"
+      ]
+    },
+    "jumlah_ak_kk": {
+      "data_key": "jumlah_ak_kk",
+      "label": "Jumlah anggota berdasarkan KK",
+      "question": "Jumlah Anggota Keluarga Berdasarkan Kartu Keluarga",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 54,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 124,
+      "form_rosters": [],
+      "source_files": [
+        "identitas_keluarga.xlsx"
+      ]
+    },
+    "jumlah_assignment_aktif": {
+      "data_key": "jumlah_assignment_aktif",
+      "label": "Jumlah assignment aktif",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": null,
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "VALIDASI_KODE_SLS.xlsx"
+      ]
+    },
+    "jumlah_emas_new": {
+      "data_key": "jumlah_emas_new",
+      "label": "Emas/perhiasan (gram)",
+      "question": "Emas/perhiasan (gram)",
+      "section": "SE2026 - L BLOK IV",
+      "number": "e",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 354,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 662,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx"
+      ]
+    },
+    "jumlah_kulkas_new": {
+      "data_key": "jumlah_kulkas_new",
+      "label": "Jumlah kulkas",
+      "question": "Lemari es/kulkas (unit)",
+      "section": "SE2026 - L BLOK IV",
+      "number": "c",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 352,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 658,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx"
+      ]
+    },
+    "jumlah_lahan_new": {
+      "data_key": "jumlah_lahan_new",
+      "label": "Jumlah lahan",
+      "question": "i. Jumlah tanah/lahan di tempat lain (selain yang ditempati):",
+      "section": "SE2026 - L BLOK IV",
+      "number": "a",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 360,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 673,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx"
+      ]
+    },
+    "jumlah_laptop_new": {
+      "data_key": "jumlah_laptop_new",
+      "label": "Jumlah laptop",
+      "question": "Komputer/laptop/tablet: (unit)",
+      "section": "SE2026 - L BLOK IV",
+      "number": "f",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 355,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 664,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx"
+      ]
+    },
+    "jumlah_mobil_new": {
+      "data_key": "jumlah_mobil_new",
+      "label": "Jumlah mobil",
+      "question": "i. Mobil (termasuk mobil listrik):",
+      "section": "SE2026 - L BLOK IV",
+      "number": "h",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 358,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 669,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx"
+      ]
+    },
+    "jumlah_motor_new": {
+      "data_key": "jumlah_motor_new",
+      "label": "Jumlah sepeda motor",
+      "question": "i. Sepeda motor (termasuk sepeda motor listrik):",
+      "section": "SE2026 - L BLOK IV",
+      "number": "g",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 356,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 666,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx"
+      ]
+    },
+    "jumlah_rumah_new": {
+      "data_key": "jumlah_rumah_new",
+      "label": "Jumlah rumah",
+      "question": "i. Jumlah rumah/bangunan di tempat lain (selain yang ditempati):",
+      "section": "SE2026 - L BLOK IV",
+      "number": "b",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 362,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 676,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx"
+      ]
+    },
+    "jumlah_tabung3kg_new": {
+      "data_key": "jumlah_tabung3kg_new",
+      "label": "Jumlah tabung gas 3 kg",
+      "question": "Tabung gas 3 kg (unit)",
+      "section": "SE2026 - L BLOK IV",
+      "number": "a",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 350,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 654,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx"
+      ]
+    },
+    "jumlah_tabung5kg_new": {
+      "data_key": "jumlah_tabung5kg_new",
+      "label": "Jumlah tabung gas 5 kg",
+      "question": "Tabung gas 5,5 kg atau lebih (unit)",
+      "section": "SE2026 - L BLOK IV",
+      "number": "b",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 351,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 656,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx"
+      ]
+    },
+    "jumlah_usaha_ditemukan": {
+      "data_key": "jumlah_usaha_ditemukan",
+      "label": "Jumlah usaha ditemukan",
+      "question": "Jumlah usaha yang ditemukan Jumlah usaha akan terisi dengan meng-update keberadaan usaha",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 69,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 140,
+      "form_rosters": [],
+      "source_files": [
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx",
+        "SCREENING_USAHA_KELUARGA.xlsx",
+        "identitas_keluarga.xlsx"
+      ]
+    },
+    "jumlah_usaha_prelist": {
+      "data_key": "jumlah_usaha_prelist",
+      "label": "Jumlah usaha prelist",
+      "question": "Jumlah Usaha yang Dimiliki Seluruh Anggota Keluarga (Sumber: UMKM dan ST2023)",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 41,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 99,
+      "form_rosters": [],
+      "source_files": [
+        "SCREENING_USAHA_KELUARGA.xlsx",
+        "identitas_keluarga.xlsx"
+      ]
+    },
+    "kategori": {
+      "data_key": "kategori",
+      "label": "Kategori KBLI",
+      "question": "h. Kategori Lapangan Usaha:",
+      "section": "SE2026 - L BLOK II",
+      "number": "13",
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 171,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 349,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "KEGIATAN_KBLI_USAHA.xlsx"
+      ]
+    },
+    "kategori_2025": {
+      "data_key": "kategori_2025",
+      "label": "Kategori KBLI 2025",
+      "question": "kategori_2025",
+      "section": "",
+      "number": null,
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 603,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 348,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "KEGIATAN_KBLI_USAHA.xlsx"
+      ]
+    },
+    "kbli_akhir": {
+      "data_key": "kbli_akhir",
+      "label": "KBLI akhir",
+      "question": "KBLI Akhir",
+      "section": "",
+      "number": null,
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 602,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 347,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "KEGIATAN_KBLI_USAHA.xlsx"
+      ]
+    },
+    "kbli_genai_value": {
+      "data_key": "kbli_genai",
+      "label": "KBLI usulan sumber",
+      "question": "g. Kode KBLI",
+      "section": "SE2026 - L BLOK II",
+      "number": "13",
+      "type": "Radio Group",
+      "options": {
+        "999999": "Pilih dari Master KBLI"
+      },
+      "options_kind": "literal-source-option",
+      "source_option": "var_kbli",
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 169,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 342,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "KEGIATAN_KBLI_USAHA.xlsx"
+      ]
+    },
+    "kbli_value": {
+      "data_key": "kbli",
+      "label": "KBLI sumber",
+      "question": "Pilih dari Master KBLI",
+      "section": "SE2026 - L BLOK II",
+      "number": null,
+      "type": "Select",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 170,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 343,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "KEGIATAN_KBLI_USAHA.xlsx"
+      ]
+    },
+    "keberadaan_dtsen_label": {
+      "data_key": "keberadaan_dtsen",
+      "label": "Keberadaan anggota",
+      "question": "a. Keberadaan (status) anggota keluarga saat ini",
+      "section": "SE2026 - L BLOK I",
+      "number": "9",
+      "type": "Radio Group",
+      "options": {
+        "1": "Tinggal di rumah/tempat tinggal ini",
+        "2": "Meninggal",
+        "3": "Tidak tinggal bersama keluarga/pindah ke wilayah/daerah lain di Indonesia",
+        "4": "Tidak tinggal bersama keluarga/pindah ke luar negeri",
+        "5": "Anggota keluarga baru",
+        "6": "Sudah pisah KK",
+        "7": "Tidak ditemukan/Tidak dikenal"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 76,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak",
+      "form_position": 204,
+      "form_rosters": [
+        "nested_dtsen"
+      ],
+      "source_files": [
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "keberadaan_dtsen_value": {
+      "data_key": "keberadaan_dtsen",
+      "label": "Keberadaan anggota",
+      "question": "a. Keberadaan (status) anggota keluarga saat ini",
+      "section": "SE2026 - L BLOK I",
+      "number": "9",
+      "type": "Radio Group",
+      "options": {
+        "1": "Tinggal di rumah/tempat tinggal ini",
+        "2": "Meninggal",
+        "3": "Tidak tinggal bersama keluarga/pindah ke wilayah/daerah lain di Indonesia",
+        "4": "Tidak tinggal bersama keluarga/pindah ke luar negeri",
+        "5": "Anggota keluarga baru",
+        "6": "Sudah pisah KK",
+        "7": "Tidak ditemukan/Tidak dikenal"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 76,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak",
+      "form_position": 204,
+      "form_rosters": [
+        "nested_dtsen"
+      ],
+      "source_files": [
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx",
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "keberadaan_usaha_label": {
+      "data_key": "keberadaan_usaha",
+      "label": "Keberadaan usaha",
+      "question": "Keberadaan Usaha",
+      "section": "SE2026 - L BLOK II",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "3": "Tutup",
+        "4": "Ganda",
+        "00": "Tidak Ditemukan",
+        "1": "Ditemukan",
+        "9": "Non Respon",
+        "2": "Baru"
+      },
+      "options_kind": "literal-source-option",
+      "source_option": "kode_keberadaan_usaha",
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 122,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 262,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx"
+      ]
+    },
+    "keberadaan_usaha_value": {
+      "data_key": "keberadaan_usaha",
+      "label": "Keberadaan usaha",
+      "question": "Keberadaan Usaha",
+      "section": "SE2026 - L BLOK II",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "3": "Tutup",
+        "4": "Ganda",
+        "00": "Tidak Ditemukan",
+        "1": "Ditemukan",
+        "9": "Non Respon",
+        "2": "Baru"
+      },
+      "options_kind": "literal-source-option",
+      "source_option": "kode_keberadaan_usaha",
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 122,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 262,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx",
+        "KEGIATAN_KBLI_USAHA.xlsx",
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "kecamatan": {
+      "data_key": "kecamatan",
+      "label": "Kecamatan",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": null,
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "VALIDASI_KODE_SLS.xlsx"
+      ]
+    },
+    "keg_jasa_value": {
+      "data_key": "keg_jasa",
+      "label": "Jenis aktivitas jasa/pertanian",
+      "question": "b4. Pilih salah satu aktivitas yang dilakukan:",
+      "section": "SE2026 - L BLOK II",
+      "number": "13",
+      "type": "Radio Group",
+      "options": {
+        "1": "Jasa",
+        "2": "Pertanian, Perikanan, dan Kehutanan"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 164,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 331,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "KEGIATAN_KBLI_USAHA.xlsx"
+      ]
+    },
+    "keg_penjualan_value": {
+      "data_key": "keg_penjualan",
+      "label": "Melakukan penjualan barang",
+      "question": "b3. Apakah melakukan penjualan barang?",
+      "section": "SE2026 - L BLOK II",
+      "number": "13",
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 163,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 330,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "KEGIATAN_KBLI_USAHA.xlsx"
+      ]
+    },
+    "keg_utama": {
+      "data_key": "keg_utama",
+      "label": "Kegiatan utama",
+      "question": "a. Apa kegiatan utama usaha/perusahaan ini? Tuliskan selengkapnya",
+      "section": "SE2026 - L BLOK II",
+      "number": "13",
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 160,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 324,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "KEGIATAN_KBLI_USAHA.xlsx"
+      ]
+    },
+    "kehutanan_value": {
+      "data_key": "kehutanan",
+      "label": "Kehutanan",
+      "question": "Apakah $namaKK atau anggota keluarga dari $namaKK selama setahun yang lalu mengelola usaha pertanian Kehutanan dengan tujuan sebagian atau seluruh hasilnya untuk dijual/ditukar?",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 66,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 137,
+      "form_rosters": [],
+      "source_files": [
+        "SCREENING_USAHA_KELUARGA.xlsx"
+      ]
+    },
+    "klasifikasi_value": {
+      "data_key": "klasifikasi",
+      "label": "Klasifikasi akomodasi jangka pendek",
+      "question": "i. Jika usaha/perusahaan merupakan akomodasi jangka pendek, apa klasifikasi usaha/perusahaan ini?",
+      "section": "SE2026 - L BLOK II",
+      "number": "13",
+      "type": "Radio Group",
+      "options": {
+        "1": "Hotel Bintang 1",
+        "2": "Hotel Bintang 2",
+        "3": "Hotel Bintang 3",
+        "4": "Hotel Bintang 4",
+        "5": "Hotel Bintang 5",
+        "6": "Lainnya (hotel non-bintang, vila, dll)"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 173,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 356,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "KEGIATAN_KBLI_USAHA.xlsx"
+      ]
+    },
+    "kode_bang_value": {
+      "data_key": "kode_bang",
+      "label": "Penggunaan bangunan",
+      "question": "Kode Penggunaan Bangunan",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "1": "Bangunan Khusus Usaha",
+        "4": "Tempat ibadah, kantor organisasi (profesi, kemasyarakatan, sosial, politik)",
+        "5": "Kantor pemerintah, kedutaan/konsulat",
+        "6": "Bangunan Lainnya yang Tidak Tercakup (Tempat Judi, Tempat Layanan Kencan, Bangunan Kosong/ Rusak)",
+        "7": "Virtual Office (VO)",
+        "8": "Panti asuhan, panti jompo(yang tidak berbayar), lapas (lembaga pemasyarakatan), barak militer",
+        "9": "Non Respon",
+        "2": "Bangunan Campuran",
+        "3": "Bangunan Tempat Tinggal"
+      },
+      "options_kind": "literal-source-option",
+      "source_option": "pilihan_kode_bang",
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 51,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 119,
+      "form_rosters": [],
+      "source_files": [
+        "identitas_keluarga.xlsx",
+        "master_assignment.xlsx"
+      ]
+    },
+    "kode_sls_subsls": {
+      "data_key": "kode_sls_subsls",
+      "label": "Kode SLS/Sub-SLS",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": null,
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "VALIDASI_KODE_SLS.xlsx"
+      ]
+    },
+    "kondisi_atap_label": {
+      "data_key": "kondisi_atap",
+      "label": "Kondisi atap",
+      "question": "b. Kondisi Atap",
+      "section": "SE2026 - L BLOK IV",
+      "number": "8",
+      "type": "Radio Group",
+      "options": {
+        "1": "Baik",
+        "2": "Rusak ringan",
+        "3": "Rusak sedang",
+        "4": "Rusak berat"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 335,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 608,
+      "form_rosters": [],
+      "source_files": [
+        "RUMAH_SANITASI_FASILITAS.xlsx"
+      ]
+    },
+    "kondisi_dinding_label": {
+      "data_key": "kondisi_dinding",
+      "label": "Kondisi dinding",
+      "question": "b. Kondisi Dinding",
+      "section": "SE2026 - L BLOK IV",
+      "number": "7",
+      "type": "Radio Group",
+      "options": {
+        "1": "Baik",
+        "2": "Rusak ringan",
+        "3": "Rusak sedang",
+        "4": "Rusak berat"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 333,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 606,
+      "form_rosters": [],
+      "source_files": [
+        "RUMAH_SANITASI_FASILITAS.xlsx"
+      ]
+    },
+    "kondisi_lantai_label": {
+      "data_key": "kondisi_lantai",
+      "label": "Kondisi lantai",
+      "question": "b. Kondisi Lantai",
+      "section": "SE2026 - L BLOK IV",
+      "number": "6",
+      "type": "Radio Group",
+      "options": {
+        "1": "Baik",
+        "2": "Rusak ringan",
+        "3": "Rusak sedang",
+        "4": "Rusak berat"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 331,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 604,
+      "form_rosters": [],
+      "source_files": [
+        "RUMAH_SANITASI_FASILITAS.xlsx"
+      ]
+    },
+    "layanan_mamin_value": {
+      "data_key": "layanan_mamin",
+      "label": "Menyediakan layanan makan/minum",
+      "question": "b2. Apakah menyediakan layanan makan minum? Ciri: terdapat kegiatan peracikkan, pemanasan ulang, atau pembuatan produk berdasarkan pesanan/permintaan pelanggan",
+      "section": "SE2026 - L BLOK II",
+      "number": "13",
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 162,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 329,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "KEGIATAN_KBLI_USAHA.xlsx"
+      ]
+    },
+    "level_3_name": {
+      "data_key": "level_3_name",
+      "label": "Kecamatan",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": "Kecamatan",
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "master_assignment.xlsx"
+      ]
+    },
+    "level_4_name": {
+      "data_key": "level_4_name",
+      "label": "Desa/kelurahan",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": "Kelurahan/Desa",
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "identitas_keluarga.xlsx",
+        "master_assignment.xlsx"
+      ]
+    },
+    "level_5_name": {
+      "data_key": "level_5_name",
+      "label": "SLS",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": "SLS",
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "identitas_keluarga.xlsx",
+        "master_assignment.xlsx"
+      ]
+    },
+    "level_6_full_code": {
+      "data_key": "level_6_full_code",
+      "label": "Kode SLS/Sub-SLS",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": "Kode Lengkap Sub-SLS",
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx",
+        "IDENTITAS_USAHA_ROSTER.xlsx",
+        "KEGIATAN_KBLI_USAHA.xlsx",
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx",
+        "PENDAPATAN_PER_ART.xlsx",
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx",
+        "RUMAH_SANITASI_FASILITAS.xlsx",
+        "SCREENING_USAHA_KELUARGA.xlsx",
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx",
+        "identitas_keluarga.xlsx",
+        "master_assignment.xlsx",
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "level_6_name": {
+      "data_key": "level_6_name",
+      "label": "Sub-SLS",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": "Sub-SLS",
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "master_assignment.xlsx"
+      ]
+    },
+    "listing": {
+      "data_key": "listing",
+      "label": "Penanda listing sumber",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": null,
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "master_assignment.xlsx"
+      ]
+    },
+    "listrik_sebulan": {
+      "data_key": "listrik_sebulan",
+      "label": "Pengeluaran listrik per bulan",
+      "question": "a. Berapa nilai pengeluaran listrik sebulan? (Dapat menggunakan pertanyaan seperti: biasanya, rata-rata, atau sebulan terakhir)",
+      "section": "SE2026 - L BLOK IV",
+      "number": "15",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 342,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 636,
+      "form_rosters": [],
+      "source_files": [
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx"
+      ]
+    },
+    "lokasi_usaha_value": {
+      "data_key": "lokasi_usaha",
+      "label": "Tempat kegiatan usaha biasanya dilakukan",
+      "question": "c. Di mana usaha tersebut biasa dilakukan?",
+      "section": "SE2026 - L BLOK II",
+      "number": "13",
+      "type": "Radio Group",
+      "options": {
+        "01": "Apotek",
+        "02": "Swalayan",
+        "03": "Los Pasar",
+        "04": "Toko, ruko, dan sejenisnya",
+        "05": "Kedai, stan, tenda",
+        "06": "Bar",
+        "07": "Kelab malam, diskotek",
+        "08": "Kafe",
+        "09": "Restoran, warung makan, dan sejenisnya",
+        "10": "Keliling",
+        "11": "Daring (online)"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 165,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 332,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "KEGIATAN_KBLI_USAHA.xlsx"
+      ]
+    },
+    "luas_lantai": {
+      "data_key": "luas_lantai",
+      "label": "Luas lantai (m²)",
+      "question": "Berapa luas lantai bangunan tempat tinggal? (m²)",
+      "section": "SE2026 - L BLOK IV",
+      "number": "5",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 329,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 602,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx",
+        "RUMAH_SANITASI_FASILITAS.xlsx"
+      ]
+    },
+    "mode": {
+      "data_key": "mode",
+      "label": "Moda pendataan",
+      "question": "Mode",
+      "section": "",
+      "number": null,
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 484,
+      "has_form_component": true,
+      "default_description": "Moda Survei",
+      "form_section_key": "b0",
+      "form_position": 22,
+      "form_rosters": [],
+      "source_files": [
+        "master_assignment.xlsx"
+      ]
+    },
+    "nama_dtsen": {
+      "data_key": "nama_dtsen",
+      "label": "Nama anggota keluarga",
+      "question": "Nama anggota keluarga",
+      "section": "SE2026 - L BLOK I",
+      "number": "6",
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 71,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak",
+      "form_position": 190,
+      "form_rosters": [
+        "nested_dtsen"
+      ],
+      "source_files": [
+        "PENDAPATAN_PER_ART.xlsx",
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx",
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "nama_info_list_value": {
+      "data_key": "nama_info_list",
+      "label": "Nama pemberi informasi",
+      "question": "Nama Pemberi Informasi",
+      "section": "KETERANGAN PEMBERI JAWABAN",
+      "number": null,
+      "type": "Select",
+      "options": {
+        "99": "Lainnya",
+        "98": "Pemilik Usaha"
+      },
+      "options_kind": "literal-source-option",
+      "source_option": "ak_info",
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 375,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "ket_jawaban",
+      "form_position": 691,
+      "form_rosters": [],
+      "source_files": [
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx"
+      ]
+    },
+    "nama_kk": {
+      "data_key": "nama_kk",
+      "label": "Nama kepala keluarga",
+      "question": "Nama Kepala Keluarga (KK) $ket",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 37,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 89,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx",
+        "IDENTITAS_USAHA_ROSTER.xlsx",
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx",
+        "PENDAPATAN_PER_ART.xlsx",
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx",
+        "RUMAH_SANITASI_FASILITAS.xlsx",
+        "SCREENING_USAHA_KELUARGA.xlsx",
+        "identitas_keluarga.xlsx",
+        "master_assignment.xlsx",
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "nama_komersial": {
+      "data_key": "nama_komersial",
+      "label": "Nama komersial",
+      "question": "b. Nama komersial usaha/perusahaan Jika tidak memiliki nama komersial, maka tuliskan nama usaha/perusahaan.",
+      "section": "SE2026 - L BLOK II",
+      "number": "8",
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 124,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 271,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx"
+      ]
+    },
+    "nama_principal": {
+      "data_key": "nama_principal",
+      "label": "Nama utama objek",
+      "question": "Nama Keluarga/Bangunan/Usaha untuk principal",
+      "section": "",
+      "number": null,
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 491,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b0",
+      "form_position": 26,
+      "form_rosters": [],
+      "source_files": [
+        "master_assignment.xlsx"
+      ]
+    },
+    "nama_usaha": {
+      "data_key": "nama_usaha",
+      "label": "Nama usaha (awal)",
+      "question": "a. Nama usaha/perusahaan",
+      "section": "SE2026 - L BLOK II",
+      "number": "8",
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 121,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 260,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx",
+        "KEGIATAN_KBLI_USAHA.xlsx",
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "nama_usaha_bang": {
+      "data_key": "nama_usaha_bang",
+      "label": "Nama usaha/bangunan",
+      "question": "Nama Bangunan/ Usaha/ Perusahaan $ket",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 34,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 78,
+      "form_rosters": [],
+      "source_files": [
+        "master_assignment.xlsx"
+      ]
+    },
+    "nama_usaha_edit": {
+      "data_key": "nama_usaha_edit",
+      "label": "Nama usaha hasil pendataan",
+      "question": "$label_edit $hint_edit",
+      "section": "SE2026 - L BLOK II",
+      "number": null,
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 123,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 266,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx"
+      ]
+    },
+    "nib": {
+      "data_key": "nib",
+      "label": "Nomor induk berusaha",
+      "question": "b. Tuliskan NIB:",
+      "section": "SE2026 - L BLOK II",
+      "number": "10",
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 143,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 295,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx"
+      ]
+    },
+    "nik": {
+      "data_key": "nik",
+      "label": "NIK sumber",
+      "question": "NIK $ket",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 36,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 88,
+      "form_rosters": [],
+      "source_files": [
+        "identitas_keluarga.xlsx"
+      ]
+    },
+    "nik_dtsen": {
+      "data_key": "nik_dtsen",
+      "label": "NIK anggota keluarga",
+      "question": "Nomor Induk Kependudukan (NIK) $NAME$ (Tulis sesuai yang tercantum di KK atau KTP paling mutakhir)",
+      "section": "SE2026 - L BLOK I",
+      "number": "7",
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 73,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak",
+      "form_position": 193,
+      "form_rosters": [
+        "nested_dtsen"
+      ],
+      "source_files": [
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "nik_dtsen_prelist": {
+      "data_key": "nik_dtsen_prelist",
+      "label": "NIK anggota (prelist)",
+      "question": "nik_dtsen_prelist",
+      "section": "",
+      "number": null,
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 565,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak",
+      "form_position": 195,
+      "form_rosters": [
+        "nested_dtsen"
+      ],
+      "source_files": [
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "nik_kk": {
+      "data_key": "nik_kk",
+      "label": "NIK kepala keluarga",
+      "question": "b. NIK Kepala Keluarga",
+      "section": "",
+      "number": "1",
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 419,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 510,
+      "form_rosters": [],
+      "source_files": [
+        "identitas_keluarga.xlsx"
+      ]
+    },
+    "nik_pengusaha": {
+      "data_key": "nik_pengusaha",
+      "label": "NIK pengusaha",
+      "question": "d. Nomor Induk Kependudukan (NIK)",
+      "section": "SE2026 - L BLOK II",
+      "number": "12",
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 158,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 316,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx"
+      ]
+    },
+    "nilai_lahan": {
+      "data_key": "nilai_lahan",
+      "label": "Nilai lahan",
+      "question": "ii. Total nilai harga jual tanah/lahan di tempat lain (selain yang ditempati):",
+      "section": "SE2026 - L BLOK IV",
+      "number": "a",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 361,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 674,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx"
+      ]
+    },
+    "nilai_mobil": {
+      "data_key": "nilai_mobil",
+      "label": "Nilai mobil",
+      "question": "ii. Total nilai aset mobil (rupiah)",
+      "section": "SE2026 - L BLOK IV",
+      "number": "h",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 359,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 670,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx"
+      ]
+    },
+    "nilai_motor": {
+      "data_key": "nilai_motor",
+      "label": "Nilai sepeda motor",
+      "question": "ii. Total nilai aset sepeda motor (rupiah)",
+      "section": "SE2026 - L BLOK IV",
+      "number": "g",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 357,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 667,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx"
+      ]
+    },
+    "nilai_pend_lain": {
+      "data_key": "nilai_pend_lain",
+      "label": "Total pendapatan lain",
+      "question": "c1. Total Pendapatan",
+      "section": "SE2026 - L BLOK III",
+      "number": "18",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 290,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 552,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDAPATAN_PER_ART.xlsx"
+      ]
+    },
+    "nilai_pend_pekerjaan": {
+      "data_key": "nilai_pend_pekerjaan",
+      "label": "Total pendapatan pekerjaan",
+      "question": "a1. Total Pendapatan (a+b+c+d+e+f)",
+      "section": "SE2026 - L BLOK III",
+      "number": "18",
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 285,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 548,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDAPATAN_PER_ART.xlsx"
+      ]
+    },
+    "nilai_pendapatan": {
+      "data_key": "nilai_pendapatan",
+      "label": "Nilai produksi/penjualan/pendapatan barang dan jasa",
+      "question": "a. Nilai $narasi barang dan jasa",
+      "section": "SE2026 - L BLOK II",
+      "number": "27",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 220,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 424,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "nilai_rumah": {
+      "data_key": "nilai_rumah",
+      "label": "Nilai rumah",
+      "question": "ii. Total nilai harga jual rumah/bangunan di tempat lain (selain yang ditempati):",
+      "section": "SE2026 - L BLOK IV",
+      "number": "b",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 363,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 677,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx"
+      ]
+    },
+    "no_bang": {
+      "data_key": "no_bang",
+      "label": "Nomor bangunan",
+      "question": "Nomor Urut Bangunan",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 50,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 117,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx",
+        "IDENTITAS_USAHA_ROSTER.xlsx",
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx",
+        "PENDAPATAN_PER_ART.xlsx",
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx",
+        "RUMAH_SANITASI_FASILITAS.xlsx",
+        "SCREENING_USAHA_KELUARGA.xlsx",
+        "identitas_keluarga.xlsx",
+        "master_assignment.xlsx",
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "no_kk": {
+      "data_key": "no_kk",
+      "label": "Nomor KK",
+      "question": "Nomor KK $ket",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 35,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 86,
+      "form_rosters": [],
+      "source_files": [
+        "identitas_keluarga.xlsx"
+      ]
+    },
+    "no_telp": {
+      "data_key": "no_telp",
+      "label": "Nomor telepon",
+      "question": "- Nomor Telepon",
+      "section": "SE2026 - L BLOK II",
+      "number": null,
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 130,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 281,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx"
+      ]
+    },
+    "no_urut_kk": {
+      "data_key": "no_urut_kk",
+      "label": "Nomor urut anggota",
+      "question": "Nomor urut anggota keluarga",
+      "section": "",
+      "number": "5",
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 554,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak",
+      "form_position": 188,
+      "form_rosters": [
+        "nested_dtsen"
+      ],
+      "source_files": [
+        "PENDAPATAN_PER_ART.xlsx",
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx",
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "no_usaha": {
+      "data_key": "no_usaha",
+      "label": "Nomor urut usaha",
+      "question": "Nomor Urut Usaha/Perusahaan",
+      "section": "SE2026 - L BLOK II",
+      "number": "7",
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 120,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 257,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx"
+      ]
+    },
+    "nomor_domisili": {
+      "data_key": "nomor_domisili",
+      "label": "Nomor alamat",
+      "question": "Blok/Nomor Rumah (Jika tidak ada nomor rumah, tulis strip (-))",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 46,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 109,
+      "form_rosters": [],
+      "source_files": [
+        "identitas_keluarga.xlsx"
+      ]
+    },
+    "non_operasional": {
+      "data_key": "non_operasional",
+      "label": "Biaya nonoperasional",
+      "question": "e. Biaya non-operasional",
+      "section": "SE2026 - L BLOK II",
+      "number": "26",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 217,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 417,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "operasional": {
+      "data_key": "operasional",
+      "label": "Biaya operasional",
+      "question": "d. Biaya operasional (air, listrik, gas, internet, pulsa, pemeliharaan, biaya angkutan, dll.)",
+      "section": "SE2026 - L BLOK II",
+      "number": "26",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 216,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 416,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "pend_gaji": {
+      "data_key": "pend_gaji",
+      "label": "Gaji",
+      "question": "Upah/Gaji",
+      "section": "SE2026 - L BLOK III",
+      "number": "a",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 279,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 542,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDAPATAN_PER_ART.xlsx"
+      ]
+    },
+    "pend_honor": {
+      "data_key": "pend_honor",
+      "label": "Honor",
+      "question": "Honor",
+      "section": "SE2026 - L BLOK III",
+      "number": "d",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 282,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 545,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDAPATAN_PER_ART.xlsx"
+      ]
+    },
+    "pend_lainnya": {
+      "data_key": "pend_lainnya",
+      "label": "Pendapatan pekerjaan lainnya",
+      "question": "Lainnya",
+      "section": "SE2026 - L BLOK III",
+      "number": "f",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 284,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 547,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDAPATAN_PER_ART.xlsx"
+      ]
+    },
+    "pend_lembur": {
+      "data_key": "pend_lembur",
+      "label": "Lembur",
+      "question": "Lembur",
+      "section": "SE2026 - L BLOK III",
+      "number": "e",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 283,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 546,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDAPATAN_PER_ART.xlsx"
+      ]
+    },
+    "pend_tunjangan": {
+      "data_key": "pend_tunjangan",
+      "label": "Tunjangan",
+      "question": "Tunjangan",
+      "section": "SE2026 - L BLOK III",
+      "number": "b",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 280,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 543,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDAPATAN_PER_ART.xlsx"
+      ]
+    },
+    "pend_uangmkn": {
+      "data_key": "pend_uangmkn",
+      "label": "Uang makan",
+      "question": "Uang Makan",
+      "section": "SE2026 - L BLOK III",
+      "number": "c",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 281,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 544,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDAPATAN_PER_ART.xlsx"
+      ]
+    },
+    "pend_usaha": {
+      "data_key": "pend_usaha",
+      "label": "Pendapatan usaha",
+      "question": "b1. Total Pendapatan",
+      "section": "SE2026 - L BLOK III",
+      "number": "18",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 288,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 550,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDAPATAN_PER_ART.xlsx"
+      ]
+    },
+    "pend_usaha_lain_value": {
+      "data_key": "pend_usaha_lain",
+      "label": "Penerimaan pendapatan lain (transfer/pensiun/pemberian)",
+      "question": "c. Penerimaan pendapatan lain (transfer/pemberian/passive income seperti pensiunan, kupon SBN, Obligasi, dll ):",
+      "section": "SE2026 - L BLOK III",
+      "number": "18",
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak",
+        "9": "Tidak Tahu"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 289,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 551,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDAPATAN_PER_ART.xlsx"
+      ]
+    },
+    "pendapatan_lain": {
+      "data_key": "pendapatan_lain",
+      "label": "Pendapatan lain usaha",
+      "question": "b. Pendapatan lainnya yang dihasilkan perusahaan",
+      "section": "SE2026 - L BLOK II",
+      "number": "27",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 221,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 425,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "pendapatan_pekerjaan_value": {
+      "data_key": "pendapatan_pekerjaan",
+      "label": "Memiliki pendapatan pekerjaan",
+      "question": "a. Pendapatan dari pekerjaan baik berupa uang maupun barang/jasa (gaji, tunjangan, uang makan, honor, lembur, dll)",
+      "section": "SE2026 - L BLOK III",
+      "number": "18",
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak",
+        "9": "Tidak Tahu"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 278,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 541,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDAPATAN_PER_ART.xlsx"
+      ]
+    },
+    "pendapatan_usaha_value": {
+      "data_key": "pendapatan_usaha",
+      "label": "Memiliki pendapatan usaha",
+      "question": "b. Pendapatan dari usaha, baik offline (warung, kos-kosan, dll) maupun online (affiliate, online shop, endorse, youtuber, dll ) :",
+      "section": "SE2026 - L BLOK III",
+      "number": "18",
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak",
+        "9": "Tidak Tahu"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 287,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 549,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDAPATAN_PER_ART.xlsx"
+      ]
+    },
+    "pengeluaran_makanan_mingguan": {
+      "data_key": "pengeluaran_makanan_mingguan",
+      "label": "Pengeluaran makanan per minggu",
+      "question": "a. Berapa rata-rata pengeluaran makanan keluarga seminggu?",
+      "section": "SE2026 - L BLOK IV",
+      "number": "16",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 344,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 638,
+      "form_rosters": [],
+      "source_files": [
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx"
+      ]
+    },
+    "pengeluaran_non_makan_bulanan": {
+      "data_key": "pengeluaran_non_makan_bulanan",
+      "label": "Pengeluaran nonmakanan per bulan",
+      "question": "b. Berapa rata-rata pengeluaran bukan makanan rutin keluarga bulanan?",
+      "section": "SE2026 - L BLOK IV",
+      "number": "16",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 345,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 640,
+      "form_rosters": [],
+      "source_files": [
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx"
+      ]
+    },
+    "pengeluaran_non_makan_tahunan": {
+      "data_key": "pengeluaran_non_makan_tahunan",
+      "label": "Pengeluaran nonmakanan per tahun",
+      "question": "c. Berapa rata-rata pengeluaran bukan makanan rutin keluarga tahunan?",
+      "section": "SE2026 - L BLOK IV",
+      "number": "16",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 346,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 641,
+      "form_rosters": [],
+      "source_files": [
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx"
+      ]
+    },
+    "pengusaha": {
+      "data_key": "pengusaha",
+      "label": "Nama pengusaha",
+      "question": "a. Nama Pengusaha / Penanggung Jawab",
+      "section": "SE2026 - L BLOK II",
+      "number": "12",
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 152,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 310,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx"
+      ]
+    },
+    "pengusaha_var_value": {
+      "data_key": "pengusaha_var",
+      "label": "Pengusaha/penanggung jawab dari anggota keluarga",
+      "question": "a. Nama Pengusaha / Penanggung Jawab",
+      "section": "SE2026 - L BLOK II",
+      "number": "12",
+      "type": "Select",
+      "options": {},
+      "options_kind": "dynamic",
+      "source_option": "art_pengusaha",
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 151,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 308,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx"
+      ]
+    },
+    "perikanan_value": {
+      "data_key": "perikanan",
+      "label": "Perikanan",
+      "question": "Apakah $namaKK atau anggota keluarga dari $namaKK selama setahun yang lalu mengelola usaha pertanian Perikanan dengan tujuan sebagian atau seluruh hasilnya untuk dijual/ditukar?",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 67,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 138,
+      "form_rosters": [],
+      "source_files": [
+        "SCREENING_USAHA_KELUARGA.xlsx"
+      ]
+    },
+    "perkebunan_value": {
+      "data_key": "perkebunan",
+      "label": "Perkebunan",
+      "question": "Apakah $namaKK atau anggota keluarga dari $namaKK selama setahun yang lalu mengelola usaha pertanian Perkebunan dengan tujuan sebagian atau seluruh hasilnya untuk dijual/ditukar?",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 64,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 135,
+      "form_rosters": [],
+      "source_files": [
+        "SCREENING_USAHA_KELUARGA.xlsx"
+      ]
+    },
+    "peternakan_value": {
+      "data_key": "peternakan",
+      "label": "Peternakan",
+      "question": "Apakah $namaKK atau anggota keluarga dari $namaKK selama setahun yang lalu mengelola usaha pertanian Peternakan dengan tujuan sebagian atau seluruh hasilnya untuk dijual/ditukar?",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 65,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 136,
+      "form_rosters": [],
+      "source_files": [
+        "SCREENING_USAHA_KELUARGA.xlsx"
+      ]
+    },
+    "produk": {
+      "data_key": "produk",
+      "label": "Produk utama",
+      "question": "f. Apa produk utama yang dihasilkan?",
+      "section": "SE2026 - L BLOK II",
+      "number": "13",
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 168,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 335,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "KEGIATAN_KBLI_USAHA.xlsx"
+      ]
+    },
+    "produk_sendiri_value": {
+      "data_key": "produk_sendiri",
+      "label": "Memproduksi barang di lokasi usaha",
+      "question": "b1. Apakah memproduksi barang di lokasi ini?",
+      "section": "SE2026 - L BLOK II",
+      "number": "13",
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 161,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 328,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "KEGIATAN_KBLI_USAHA.xlsx"
+      ]
+    },
+    "profesi_label": {
+      "data_key": "profesi",
+      "label": "Profesi pekerjaan utama",
+      "question": "Profesi Pekerjaan Utama $NAME$ (usia 10 tahun ke atas)",
+      "section": "SE2026 - L BLOK III",
+      "number": "16",
+      "type": "Select",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 275,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 535,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDAPATAN_PER_ART.xlsx",
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx"
+      ]
+    },
+    "profesi_lainnya": {
+      "data_key": "profesi_lainnya",
+      "label": "Profesi pekerjaan utama lainnya",
+      "question": "Profesi Pekerjaan Utama lainnya:",
+      "section": "SE2026 - L BLOK III",
+      "number": null,
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 276,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 536,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx"
+      ]
+    },
+    "profesi_value": {
+      "data_key": "profesi",
+      "label": "Profesi pekerjaan utama",
+      "question": "Profesi Pekerjaan Utama $NAME$ (usia 10 tahun ke atas)",
+      "section": "SE2026 - L BLOK III",
+      "number": "16",
+      "type": "Select",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 275,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 535,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx"
+      ]
+    },
+    "proses": {
+      "data_key": "proses",
+      "label": "Proses usaha",
+      "question": "e. Bagaimana proses mengubah input tersebut menjadi produk output (beserta alatnya)? Contoh: menggiling daging ikan menjadi sosis; membuat kebab di rumah dan sudah dikemasi kemudian dititipkan di warung; penggaraman; pengasapan; pemindangan; pembekuan.",
+      "section": "SE2026 - L BLOK II",
+      "number": "13",
+      "type": "Text Area",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 167,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 334,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "KEGIATAN_KBLI_USAHA.xlsx"
+      ]
+    },
+    "pulsa_sebulan": {
+      "data_key": "pulsa_sebulan",
+      "label": "Pengeluaran komunikasi per bulan",
+      "question": "b. Berapa pengeluaran pulsa dan internet seluruh anggota keluarga sebulan? (Dapat menggunakan pertanyaan seperti: biasanya, rata-rata, atau sebulan terakhir)",
+      "section": "SE2026 - L BLOK IV",
+      "number": "15",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 343,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 637,
+      "form_rosters": [],
+      "source_files": [
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx"
+      ]
+    },
+    "punya_nib_value": {
+      "data_key": "punya_nib",
+      "label": "Kepemilikan NIB",
+      "question": "a. Apakah memiliki Nomor Induk Berusaha (NIB)?",
+      "section": "SE2026 - L BLOK II",
+      "number": "10",
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 142,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 294,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx"
+      ]
+    },
+    "rekening_label": {
+      "data_key": "rekening",
+      "label": "Kepemilikan rekening",
+      "question": "Apakah $NAME$ memiliki rekening aktif atau dompet digital?",
+      "section": "SE2026 - L BLOK III",
+      "number": "19",
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya untuk usaha",
+        "2": "Ya untuk pribadi",
+        "3": "Ya untuk usaha dan pribadi",
+        "4": "Tidak ada",
+        "9": "Tidak tahu"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 291,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 556,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx"
+      ]
+    },
+    "rekening_value": {
+      "data_key": "rekening",
+      "label": "Kepemilikan rekening",
+      "question": "Apakah $NAME$ memiliki rekening aktif atau dompet digital?",
+      "section": "SE2026 - L BLOK III",
+      "number": "19",
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya untuk usaha",
+        "2": "Ya untuk pribadi",
+        "3": "Ya untuk usaha dan pribadi",
+        "4": "Tidak ada",
+        "9": "Tidak tahu"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 291,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 556,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx"
+      ]
+    },
+    "rt": {
+      "data_key": "rt",
+      "label": "RT",
+      "question": "• RT",
+      "section": "SE2026 - L BLOK II",
+      "number": null,
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 126,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 276,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx"
+      ]
+    },
+    "rw": {
+      "data_key": "rw",
+      "label": "RW",
+      "question": "• RW",
+      "section": "SE2026 - L BLOK II",
+      "number": null,
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 127,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 277,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx"
+      ]
+    },
+    "sekolah_label": {
+      "data_key": "sekolah",
+      "label": "Partisipasi sekolah",
+      "question": "Partisipasi sekolah $NAME$",
+      "section": "SE2026 - L BLOK III",
+      "number": "14",
+      "type": "Radio Group",
+      "options": {
+        "1": "Masih sekolah",
+        "2": "Tidak bersekolah lagi",
+        "3": "Tidak/belum pernah sekolah"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 273,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 531,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx"
+      ]
+    },
+    "sekolah_prelist": {
+      "data_key": "sekolah_prelist",
+      "label": "Partisipasi sekolah pada prelist",
+      "question": "Sekolah Prelist",
+      "section": "",
+      "number": null,
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 560,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 530,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx"
+      ]
+    },
+    "sekolah_value": {
+      "data_key": "sekolah",
+      "label": "Partisipasi sekolah",
+      "question": "Partisipasi sekolah $NAME$",
+      "section": "SE2026 - L BLOK III",
+      "number": "14",
+      "type": "Radio Group",
+      "options": {
+        "1": "Masih sekolah",
+        "2": "Tidak bersekolah lagi",
+        "3": "Tidak/belum pernah sekolah"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 273,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 531,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx"
+      ]
+    },
+    "sewa_dinas": {
+      "data_key": "sewa_dinas",
+      "label": "Perkiraan sewa rumah dinas/lainnya per bulan",
+      "question": "Jika dinas atau lainnya , perkiraan nilai sewa sebulan:",
+      "section": "SE2026 - L BLOK IV",
+      "number": "c",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 328,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 601,
+      "form_rosters": [],
+      "source_files": [
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx"
+      ]
+    },
+    "sewa_kontrak": {
+      "data_key": "sewa_kontrak",
+      "label": "Nilai kontrak/sewa rumah per bulan",
+      "question": "Jika kontrak/sewa , nilai kontrak sebulan:",
+      "section": "SE2026 - L BLOK IV",
+      "number": "b",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 327,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 600,
+      "form_rosters": [],
+      "source_files": [
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx"
+      ]
+    },
+    "sewa_sendiri": {
+      "data_key": "sewa_sendiri",
+      "label": "Perkiraan sewa rumah milik sendiri/bebas sewa per bulan",
+      "question": "Jika milik sendiri/bebas sewa , perkiraan harga sewa sebulan:",
+      "section": "SE2026 - L BLOK IV",
+      "number": "a",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 326,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 599,
+      "form_rosters": [],
+      "source_files": [
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx"
+      ]
+    },
+    "skala_usaha": {
+      "data_key": "skala_usaha",
+      "label": "Skala usaha",
+      "question": "skala_usaha",
+      "section": "",
+      "number": null,
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 577,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 267,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "IDENTITAS_USAHA_ROSTER.xlsx"
+      ]
+    },
+    "sls": {
+      "data_key": "sls",
+      "label": "SLS",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": null,
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "VALIDASI_KODE_SLS.xlsx"
+      ]
+    },
+    "status_kawin_label": {
+      "data_key": "status_kawin",
+      "label": "Status perkawinan",
+      "question": "Apakah status perkawinan $NAME$",
+      "section": "SE2026 - L BLOK I",
+      "number": "11",
+      "type": "Radio Group",
+      "options": {
+        "1": "Belum kawin",
+        "2": "Kawin/nikah",
+        "3": "Cerai hidup",
+        "4": "Cerai mati"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 81,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak",
+      "form_position": 210,
+      "form_rosters": [
+        "nested_dtsen"
+      ],
+      "source_files": [
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "status_kepemilikan_label": {
+      "data_key": "status_kepemilikan",
+      "label": "Status kepemilikan rumah",
+      "question": "a. Apa status kepemilikan bangunan tempat tinggal yang ditempati?",
+      "section": "SE2026 - L BLOK IV",
+      "number": "3",
+      "type": "Radio Group",
+      "options": {
+        "1": "Milik sendiri",
+        "2": "Kontrak/sewa",
+        "3": "Bebas sewa",
+        "4": "Dinas",
+        "5": "Lainnya"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 323,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 595,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx",
+        "RUMAH_SANITASI_FASILITAS.xlsx"
+      ]
+    },
+    "status_kerja_label": {
+      "data_key": "status_kerja",
+      "label": "Kedudukan pekerjaan",
+      "question": "Status Kedudukan Dalam Pekerjaan Utama $NAME$",
+      "section": "SE2026 - L BLOK III",
+      "number": "17",
+      "type": "Radio Group",
+      "options": {
+        "1": "Berusaha sendiri",
+        "2": "Berusaha dibantu buruh",
+        "3": "Buruh/karyawan/pegawai swasta",
+        "4": "ASN/TNI/Polri/BUMN/BUMD/pejabat negara/kades",
+        "5": "Pekerja bebas",
+        "6": "Pekerja keluarga/tidak dibayar",
+        "9": "Tidak Tahu"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 277,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 537,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDAPATAN_PER_ART.xlsx",
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx"
+      ]
+    },
+    "status_kerja_value": {
+      "data_key": "status_kerja",
+      "label": "Kedudukan pekerjaan",
+      "question": "Status Kedudukan Dalam Pekerjaan Utama $NAME$",
+      "section": "SE2026 - L BLOK III",
+      "number": "17",
+      "type": "Radio Group",
+      "options": {
+        "1": "Berusaha sendiri",
+        "2": "Berusaha dibantu buruh",
+        "3": "Buruh/karyawan/pegawai swasta",
+        "4": "ASN/TNI/Polri/BUMN/BUMD/pejabat negara/kades",
+        "5": "Pekerja bebas",
+        "6": "Pekerja keluarga/tidak dibayar",
+        "9": "Tidak Tahu"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 277,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak_lanjutan",
+      "form_position": 537,
+      "form_rosters": [
+        "nested_dtsen_var"
+      ],
+      "source_files": [
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx"
+      ]
+    },
+    "sub_sls": {
+      "data_key": "sub_sls",
+      "label": "Sub-SLS",
+      "question": "",
+      "section": "",
+      "number": null,
+      "type": null,
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": null,
+      "metadata_row": null,
+      "has_form_component": false,
+      "default_description": null,
+      "form_section_key": null,
+      "form_position": null,
+      "form_rosters": [],
+      "source_files": [
+        "VALIDASI_KODE_SLS.xlsx"
+      ]
+    },
+    "sumber_penerangan_label": {
+      "data_key": "sumber_penerangan",
+      "label": "Sumber penerangan",
+      "question": "Apakah sumber utama penerangan rumah tangga ini?",
+      "section": "SE2026 - L BLOK IV",
+      "number": "13",
+      "type": "Radio Group",
+      "options": {
+        "1": "Listrik PLN dengan meteran",
+        "2": "Listrik PLN tanpa meteran",
+        "3": "Listrik Non-PLN",
+        "4": "Bukan listrik"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 340,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 615,
+      "form_rosters": [],
+      "source_files": [
+        "RUMAH_SANITASI_FASILITAS.xlsx"
+      ]
+    },
+    "tahun_operasi": {
+      "data_key": "tahun_operasi",
+      "label": "Tahun mulai operasi",
+      "question": "Tahun berapa usaha/perusahaan ini mulai beroperasi secara komersial ? Tahun beroperasi komersial terdiri dari 4 angka. Contoh: 1990; 2025;dsb.",
+      "section": "SE2026 - L BLOK II",
+      "number": "25",
+      "type": "Masking",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 212,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 409,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "tanaman_pangan_value": {
+      "data_key": "tanaman_pangan",
+      "label": "Tanaman pangan",
+      "question": "Apakah $namaKK atau anggota keluarga dari $namaKK selama setahun yang lalu mengelola usaha pertanian Tanaman Pangan dengan tujuan sebagian atau seluruh hasilnya untuk dijual/ditukar? termasuk yang seluruhnya dikonsumsi sendiri (padi, jagung, kedelai, kacang tanah, kacang hijau, ubi kayu, ubi jalar, talas, ganyong, dan palawija lainnya)",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 62,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 133,
+      "form_rosters": [],
+      "source_files": [
+        "SCREENING_USAHA_KELUARGA.xlsx"
+      ]
+    },
+    "telp_info": {
+      "data_key": "telp_info",
+      "label": "Telepon pemberi informasi",
+      "question": "Nomor HP/Telepon",
+      "section": "KETERANGAN PEMBERI JAWABAN",
+      "number": null,
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 377,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "ket_jawaban",
+      "form_position": 695,
+      "form_rosters": [],
+      "source_files": [
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx"
+      ]
+    },
+    "tempat_bab_label": {
+      "data_key": "tempat_bab",
+      "label": "Fasilitas buang air besar",
+      "question": "Apakah memiliki fasilitas tempat buang air besar dan siapa saja yang menggunakan?",
+      "section": "SE2026 - L BLOK IV",
+      "number": "9",
+      "type": "Radio Group",
+      "options": {
+        "1": "Ada, digunakan oleh anggota keluarga dalam satu rumah",
+        "2": "Ada, digunakan bersama oleh anggota keluarga dari beberapa rumah",
+        "3": "Ada, di MCK komunal",
+        "4": "Ada, di MCK umum/siapapun menggunakan",
+        "5": "Ada, anggota keluarga tidak menggunakan",
+        "6": "Tidak ada"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 336,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 609,
+      "form_rosters": [],
+      "source_files": [
+        "RUMAH_SANITASI_FASILITAS.xlsx"
+      ]
+    },
+    "tgl_lahir": {
+      "data_key": "tgl_lahir",
+      "label": "Tanggal lahir",
+      "question": "• Tanggal Lahir",
+      "section": "SE2026 - L BLOK I",
+      "number": null,
+      "type": "Text Input",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 83,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak",
+      "form_position": 215,
+      "form_rosters": [
+        "nested_dtsen"
+      ],
+      "source_files": [
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "thn_lahir": {
+      "data_key": "thn_lahir",
+      "label": "Tahun lahir",
+      "question": "• Tahun Lahir",
+      "section": "SE2026 - L BLOK I",
+      "number": null,
+      "type": "Masking",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 85,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak",
+      "form_position": 217,
+      "form_rosters": [
+        "nested_dtsen"
+      ],
+      "source_files": [
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "tk_dibayar": {
+      "data_key": "tk_dibayar",
+      "label": "Tenaga kerja dibayar",
+      "question": "a2. Pekerja dibayar",
+      "section": "SE2026 - L BLOK II",
+      "number": "24",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 208,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 402,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "tk_laki": {
+      "data_key": "tk_laki",
+      "label": "Tenaga kerja laki-laki",
+      "question": "a1. Pekerja laki-laki",
+      "section": "SE2026 - L BLOK II",
+      "number": "24",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 204,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 397,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "tk_pr": {
+      "data_key": "tk_pr",
+      "label": "Tenaga kerja perempuan",
+      "question": "b1. Pekerja perempuan",
+      "section": "SE2026 - L BLOK II",
+      "number": "24",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 205,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 398,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "tk_tdk_dibayar": {
+      "data_key": "tk_tdk_dibayar",
+      "label": "Tenaga kerja tidak dibayar",
+      "question": "b2. Pekerja tidak dibayar",
+      "section": "SE2026 - L BLOK II",
+      "number": "24",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 209,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 403,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "total_aset_bln": {
+      "data_key": "total_aset_bln",
+      "label": "Total aset pada akhir bulan yang lalu",
+      "question": "c. Nilai total aset pada akhir bulan yang lalu*",
+      "section": "SE2026 - L BLOK II",
+      "number": "32",
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 253,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 469,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "total_aset_thn": {
+      "data_key": "total_aset_thn",
+      "label": "Total aset pada 31 Desember 2025",
+      "question": "c. Nilai total aset pada 31 Desember 2025",
+      "section": "SE2026 - L BLOK II",
+      "number": "28",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 227,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 432,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "total_pendapatan": {
+      "data_key": "total_pendapatan",
+      "label": "Total nilai produksi/penjualan/pendapatan usaha",
+      "question": "c. Total nilai $narasi (a+b)",
+      "section": "SE2026 - L BLOK II",
+      "number": "27",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 222,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 426,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "total_pendapatan_keluarga_sebulan": {
+      "data_key": "total_pendapatan_keluarga_sebulan",
+      "label": "Total pendapatan keluarga per bulan",
+      "question": "Total Pendapatan Keluarga Sebulan",
+      "section": "",
+      "number": null,
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 508,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 642,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx",
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx"
+      ]
+    },
+    "total_pengeluaran": {
+      "data_key": "total_pengeluaran",
+      "label": "Total pengeluaran usaha",
+      "question": "f. Total pengeluaran (a+b+c+d+e)",
+      "section": "SE2026 - L BLOK II",
+      "number": "26",
+      "type": "Currency",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 218,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 419,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "total_pengeluaran_keluarga_sebulan": {
+      "data_key": "total_pengeluaran_keluarga_sebulan",
+      "label": "Total pengeluaran keluarga per bulan",
+      "question": "Total Pengeluaran Keluarga Sebulan",
+      "section": "",
+      "number": null,
+      "type": "Variable",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 510,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_perumahan",
+      "form_position": 643,
+      "form_rosters": [],
+      "source_files": [
+        "ASET_KELUARGA.xlsx",
+        "PENDAPATAN_PENGELUARAN_KELUARGA.xlsx"
+      ]
+    },
+    "total_tk_bayar": {
+      "data_key": "total_tk_bayar",
+      "label": "Total tenaga kerja menurut pembayaran",
+      "question": "c2. Total pekerja (a2+b2)",
+      "section": "SE2026 - L BLOK II",
+      "number": "24",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 210,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 404,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "total_tk_jk": {
+      "data_key": "total_tk_jk",
+      "label": "Total tenaga kerja menurut jenis kelamin",
+      "question": "c1. Total pekerja (a1+b1)",
+      "section": "SE2026 - L BLOK II",
+      "number": "24",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 206,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "blokl",
+      "form_position": 399,
+      "form_rosters": [
+        "se2026_nested"
+      ],
+      "source_files": [
+        "TENAGA_KERJA_KEUANGAN_USAHA.xlsx"
+      ]
+    },
+    "umur_ak": {
+      "data_key": "umur_ak",
+      "label": "Umur (tahun)",
+      "question": "b. Umur $NAME$",
+      "section": "SE2026 - L BLOK I",
+      "number": "13",
+      "type": "Number",
+      "options": {},
+      "options_kind": null,
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 86,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b_ak",
+      "form_position": 219,
+      "form_rosters": [
+        "nested_dtsen"
+      ],
+      "source_files": [
+        "PENDAPATAN_PER_ART.xlsx",
+        "PENDIDIKAN_PEKERJAAN_ART.xlsx",
+        "roster_anggota_keluarga.xlsx"
+      ]
+    },
+    "usaha_bongkar_value": {
+      "data_key": "usaha_bongkar",
+      "label": "Usaha tetap dengan peralatan bongkar-pasang",
+      "question": "Apakah $namaKK atau anggota keluarga dari $namaKK memiliki usaha di luar tempat tinggal, yang lokasi usahanya tetap tetapi peralatan/ perlengkapan usahanya dipindah/ dibawa pulang/ dibongkar pasang (misal: usaha kaki lima/ tenda seafood yang jika sudah tutup semua peralatan akan dibawa pulang, usaha dagang martabak gerobakan yang mangkal di pinggir jalan namun jika sudah selesai gerobak akan dibawa pulang, dan usaha lain yang sejenis)",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 59,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 129,
+      "form_rosters": [],
+      "source_files": [
+        "SCREENING_USAHA_KELUARGA.xlsx"
+      ]
+    },
+    "usaha_keliling_value": {
+      "data_key": "usaha_keliling",
+      "label": "Usaha keliling",
+      "question": "Apakah $namaKK atau anggota keluarga dari $namaKK memiliki usaha keliling (pedagang sayur keliling, ojek keliling, tukang becak keliling, supir",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 57,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 127,
+      "form_rosters": [],
+      "source_files": [
+        "SCREENING_USAHA_KELUARGA.xlsx"
+      ]
+    },
+    "usaha_konstruksi_value": {
+      "data_key": "usaha_konstruksi",
+      "label": "Usaha konstruksi/pemborongan atau penggalian perorangan",
+      "question": "Apakah $namaKK atau anggota keluarga dari $namaKK memiliki usaha sebagai pemborong konstruksi/perusahaan konstruksi yang berlokasi di tempat tinggal ini atau penggalian perorangan?",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 60,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 130,
+      "form_rosters": [],
+      "source_files": [
+        "SCREENING_USAHA_KELUARGA.xlsx"
+      ]
+    },
+    "usaha_kos_value": {
+      "data_key": "usaha_kos",
+      "label": "Persewaan lahan, rumah kontrakan, atau kos",
+      "question": "Apakah $namaKK atau anggota keluarga dari $namaKK memiliki usaha penyewaan lahan atau kontrakan atau kos kosan?",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 56,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 126,
+      "form_rosters": [],
+      "source_files": [
+        "SCREENING_USAHA_KELUARGA.xlsx"
+      ]
+    },
+    "usaha_lain_value": {
+      "data_key": "usaha_lain",
+      "label": "Kegiatan usaha lainnya",
+      "question": "Apakah $namaKK atau anggota keluarga dari $namaKK memiliki usaha lain? Seperti mengajar privat dari rumah ke rumah, Freelance, YouTuber, Konten Kreator, Afiliator, dan semua usaha lainnya yang dilakukan dalam bangunan ini?",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 61,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 131,
+      "form_rosters": [],
+      "source_files": [
+        "SCREENING_USAHA_KELUARGA.xlsx"
+      ]
+    },
+    "usaha_online_value": {
+      "data_key": "usaha_online",
+      "label": "Usaha online",
+      "question": "Apakah $namaKK atau anggota keluarga dari $namaKK memiliki usaha online contoh: menjual barang melalui tokopedia/ shopee/website/ instagram tanpa memiliki toko?",
+      "section": "SE2026 - P",
+      "number": null,
+      "type": "Radio Group",
+      "options": {
+        "1": "Ya",
+        "2": "Tidak"
+      },
+      "options_kind": "inline",
+      "source_option": null,
+      "ambiguous_options": [],
+      "metadata_sheet": "_METADATA_TEMPLATE",
+      "metadata_row": 58,
+      "has_form_component": true,
+      "default_description": null,
+      "form_section_key": "b5",
+      "form_position": 128,
+      "form_rosters": [],
+      "source_files": [
+        "SCREENING_USAHA_KELUARGA.xlsx"
+      ]
+    }
+  }
+}
