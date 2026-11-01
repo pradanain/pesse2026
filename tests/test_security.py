@@ -54,7 +54,8 @@ def test_csrf_and_rate_limit(app):
 def test_safe_headers_and_cookie_flags(client):
     response = client.get('/')
     assert response.headers['Cache-Control'] == 'no-store'
-    assert response.headers['Referrer-Policy'] == 'no-referrer'
+    # Keep same-origin Referer for HTTPS CSRF checks; suppress it cross-origin.
+    assert response.headers['Referrer-Policy'] == 'same-origin'
     assert "frame-ancestors 'none'" in response.headers['Content-Security-Policy']
     assert 'HttpOnly' in response.headers.get('Set-Cookie', '')
     assert 'SameSite=Lax' in response.headers.get('Set-Cookie', '')
